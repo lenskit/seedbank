@@ -7,5 +7,38 @@ module = "seedbank"
 author = "Michael Ekstrand"
 author-email = "michaelekstrand@boisestate.edu"
 home-page = "https://seedbank.lensit.org"
-classifiers = ["License :: OSI Approved :: MIT License"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Operating System :: OS Independent",
+]
+requires-python = ">= 3.7"
+description-file = "README.md"
+requires = [
+    "numpy >=1.17"
+]
 
+[tool.flit.metadata.requires-extra]
+dev = [
+    "flake8"
+]
+test = [
+    "pytest >= 6",
+    "pytest-doctestplus",
+    "hypothesis",
+]
+backends = [
+    "numba",
+    "tensorflow",
+    "torch",
+    "cupy",
+]
+tf2 = [
+    "tensorflow >=2"
+]
+tf1 = [
+    "tensorflow <2"
+]
