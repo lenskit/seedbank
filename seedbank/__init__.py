@@ -13,7 +13,16 @@ from seedbank._state import SeedState
 _log = logging.getLogger(__name__)
 _root_state = SeedState()
 
+__all__ = [
+    'initialize',
+    'derive_seed',
+    'numpy_rng',
+    'numpy_random_state'   
+]
+
+# This list contains the modules that initialize seeds.
 SEED_INITIALIZERS = [
+    'seedbank.stdlib',
     'seedbank.numpy',
     'seedbank.numba',
     'seedbank.tensorflow',
@@ -97,7 +106,7 @@ def numpy_rng(spec=None):
         return np.random.default_rng(seed)
 
 
-def numpy_rng(spec=None):
+def numpy_random_state(spec=None):
     """
     Get a legacy NumPy random number generator (:class:`numpy.random.mtrand.RandomState`).
     This is similar to :func:`sklearn.utils.check_random_seed`.
