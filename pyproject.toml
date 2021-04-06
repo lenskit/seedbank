@@ -16,7 +16,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 requires-python = ">= 3.7"
-description-file = "README.md"
+# description-file = "README.md"
 requires = [
     "numpy >=1.17"
 ]
@@ -30,15 +30,8 @@ test = [
     "pytest-doctestplus",
     "hypothesis",
 ]
-backends = [
-    "numba",
-    "tensorflow",
-    "torch",
-    "cupy",
-]
-tf2 = [
-    "tensorflow >=2"
-]
-tf1 = [
-    "tensorflow <2"
-]
+numba = ["numba"]
+torch = ["torch"]
+cupy = ["cupy"]
+tf1 = ["tensorflow >=1,<2"]
+tf2 = ["tensorflow >=2,<3"]
