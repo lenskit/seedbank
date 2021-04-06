@@ -23,7 +23,8 @@ requires = [
 
 [tool.flit.metadata.requires-extra]
 dev = [
-    "flake8"
+    "flake8",
+    "ipython",
 ]
 test = [
     "pytest >= 6",
