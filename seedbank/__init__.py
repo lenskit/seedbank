@@ -5,12 +5,20 @@ Common infrastructure for initializing random number generators.
 __version__ = '0.1.0'
 
 import logging
+from importlib import import_module
 import numpy as np
 
 from seedbank._state import SeedState
 
 _log = logging.getLogger(__name__)
 _root_state = SeedState()
+
+SEED_INITIALIZERS = [
+    'seedbank.numpy',
+    'seedbank.numba',
+    'seedbank.tensorflow',
+    'seedbank.torch',
+]
 
 
 def initialize(seed, *keys):
@@ -31,6 +39,12 @@ def initialize(seed, *keys):
     """
     _root_state.initialize(seed, keys)
     _log.info('initialized root seed %s', _root_state.seed)
+
+    for mod in SEED_INITIALIZERS:
+        if isinstance(mod, str):
+            mod = import_module(mod)
+        
+        mod.seed(_root_state)
 
     return _root_state.seed
 
