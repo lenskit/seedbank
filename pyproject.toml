@@ -16,7 +16,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 requires-python = ">= 3.7"
-# description-file = "README.md"
+description-file = "README.md"
 requires = [
     "numpy >=1.17"
 ]
