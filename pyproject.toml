@@ -29,7 +29,7 @@ dev = [
 test = [
     "pytest >= 6",
     "pytest-doctestplus",
-    "hypothesis",
+    # "hypothesis",
 ]
 numba = ["numba"]
 torch = ["torch"]
