@@ -4,13 +4,13 @@ from seedbank import initialize
 
 try:
     from numba import njit
+
+    @njit
+    def _numba_rand():
+        return np.random.randint(10000)
+
 except ImportError:
     pytestmark = pytest.mark.skip('Numba JIT not available')
-
-
-@njit
-def _numba_rand():
-    return np.random.randint(10000)
 
 
 def test_numba_init():
