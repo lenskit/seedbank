@@ -17,7 +17,7 @@ __all__ = [
     'initialize',
     'derive_seed',
     'numpy_rng',
-    'numpy_random_state'   
+    'numpy_random_state'
 ]
 
 # This list contains the modules that initialize seeds.
@@ -52,8 +52,8 @@ def initialize(seed, *keys):
     for mod in SEED_INITIALIZERS:
         if isinstance(mod, str):
             mod = import_module(mod)
-        
-        mod.seed(_root_state)
+        if mod.AVAILABLE:
+            mod.seed(_root_state)
 
     return _root_state.seed
 
@@ -96,14 +96,13 @@ def numpy_rng(spec=None):
         numpy.random.Generator: A random number generator.
     """
 
-    rng = None
     if isinstance(spec, np.random.Generator):
         return spec
     elif isinstance(spec, np.random.RandomState):
         return np.random.Generator(spec._bit_generator)
     else:
         seed = _root_state.derive(spec)
-        return np.random.default_rng(seed)
+        return np.random.default_rng(seed.seed)
 
 
 def numpy_random_state(spec=None):
@@ -120,7 +119,7 @@ def numpy_random_state(spec=None):
             * :class:`numpy.random.SeedSequence`
             * :class:`numpy.random.mtrand.RandomState`
             * :class:`numpy.random.Generator`
-    
+
     Returns:
         numpy.random.mtrand.RandomState: A random number generator.
     """
@@ -132,4 +131,4 @@ def numpy_random_state(spec=None):
         return np.random.RandomState(spec._bit_generator)
     else:
         seed = _root_state.derive(spec)
-        return np.random.RandomState(seed)
+        return np.random.RandomState(seed.int_seed)

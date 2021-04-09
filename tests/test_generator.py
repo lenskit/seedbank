@@ -18,7 +18,7 @@ def test_generator_seed_seq():
     assert isinstance(rng, np.random.Generator)
 
 def test_generator_convert_from_rs():
-    rng1 = np.random.RandomState
+    rng1 = np.random.RandomState()
     rng = numpy_rng(rng1)
     assert isinstance(rng, np.random.Generator)
 

@@ -17,3 +17,14 @@ def make_key(data):
 
     dt = type(data)
     raise TypeError('invalid seed type {ot}')
+
+
+def make_seed(data):
+    """
+    Get a seed sequence from a piece of data.
+    """
+    if isinstance(data, np.random.SeedSequence):
+        return data
+
+    entropy = make_key(data)
+    return np.random.SeedSequence(entropy)

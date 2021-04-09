@@ -1,6 +1,6 @@
 import numpy as np
 
-from seedbank._keys import make_key
+from seedbank._keys import make_key, make_seed
 
 class SeedState:
     """
@@ -24,8 +24,7 @@ class SeedState:
         return self._seed.generate_state(1)[0]
 
     def initialize(self, seed, keys):
-        if not isinstance(seed, np.random.SeedSequence):
-            seed = np.random.SeedSequence(make_key(seed))
+        seed = make_seed(seed)
 
         if keys:
             seed = self.derive(seed, keys).seed
@@ -33,16 +32,18 @@ class SeedState:
         self._seed = seed
         return seed
 
-    def derive(self, base, keys):
+    def derive(self, base, keys=None):
         if base is None:
             base = self.seed
+        else:
+            base = make_seed(base)
 
         if keys:
             k2 = tuple(make_key(k) for k in keys)
             seed = np.random.SeedSequence(base.entropy, spawn_key=base.spawn_key + k2)
         else:
             seed = base.spawn(1)[0]
-        
+
         return SeedState(seed)
 
     def rng(self, seed=None):
