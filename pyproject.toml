@@ -34,5 +34,5 @@ test = [
 numba = ["numba"]
 torch = ["torch"]
 cupy = ["cupy"]
-tf1 = ["tensorflow >=1,<2"]
-tf2 = ["tensorflow >=2,<3"]
+# tf1 = ["tensorflow >=1,<2"]
+tf = ["tensorflow >=2,<3"]
