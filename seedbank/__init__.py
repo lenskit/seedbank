@@ -36,6 +36,10 @@ def initialize(seed, *keys):
     called very early in the setup.  This initializes all known and available RNGs with
     a seed derived from the specified seed.
 
+    If you do **not** call this function, a default root seed is used, so functions like
+    :func:`derive_seed` and :func:`numba_rng` work, but all other random number generators
+    are left to their own default seeding behavior.
+
     Args:
         seed(int or str or numpy.random.SeedSequence):
             The random seed to initialize with.
