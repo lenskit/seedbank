@@ -38,5 +38,8 @@ generator directly; this is recommended practice with NumPy's new RNG architectu
 SeedBank provides functions for obtaining RNGs of various types.  These functions take seeds that
 override the global seed to support seed-specifying APIs.
 
+Packages that expect their client code to use SeedBank to seed the random number ecosystem should
+use these functions to obtain random number generators.
+
 .. autofunction:: numpy_rng
 .. autofunction:: numpy_random_state
