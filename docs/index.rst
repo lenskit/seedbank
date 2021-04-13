@@ -40,3 +40,4 @@ Further Reading
 .. toctree::
 
     api
+    patterns
