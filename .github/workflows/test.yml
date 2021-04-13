@@ -60,7 +60,7 @@ jobs:
       uses: codecov/codecov-action@v1
 
   test-extra:
-    name: Test single extra ${matrix.extra}
+    name: Test single extra ${{matrix.extra}}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -99,7 +99,7 @@ jobs:
 
     - name: Install package deps
       run: |
-        flit install --pth-file --deps=develop --extras ${matrix.extra}
+        flit install --pth-file --deps=develop --extras ${{matrix.extra}}
 
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
