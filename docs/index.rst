@@ -8,6 +8,10 @@ The SeedBank package provides a unified interface to seeding them, along with AP
 additional RNG seeds in a predictable way (using NumPy 1.17's new random infrastructure) and
 construction random generators.
 
+Credit for the name “seedbank” goes to `Keith Moore`_.
+
+.. _`Keith Moore`: https://twitter.com/keithmo/status/1379261739498266625
+
 Quickstart
 ----------
 
