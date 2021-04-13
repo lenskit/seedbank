@@ -32,6 +32,10 @@ test = [
     "pytest-cov"
     # "hypothesis",
 ]
+doc = [
+    "sphinx",
+    "furo",
+]
 numba = ["numba"]
 torch = ["torch"]
 # cupy = ["cupy"]
