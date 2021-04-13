@@ -33,6 +33,7 @@ intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
     'numpy': ('https://docs.scipy.org/doc/numpy/', None),
     'numba': ('https://numba.readthedocs.io/en/stable/', None),
+    'sklearn': ('https://scikit-learn.org/stable/', None),
     'torch': ('https://pytorch.org/docs/stable/', None),
 }
 

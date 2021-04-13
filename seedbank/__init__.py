@@ -37,10 +37,10 @@ def initialize(seed, *keys):
     a seed derived from the specified seed.
 
     Args:
-        seed(int or numpy.random.SeedSequence):
+        seed(int or str or numpy.random.SeedSequence):
             The random seed to initialize with.
         keys:
-            Additional keys, to use as a ``spawn_key``.
+            Additional keys, to use as a ``spawn_key`` on the seed sequence.
             Passed to :func:`derive_seed`.
     Returns:
         numpy.random.SeedSequence:
@@ -77,9 +77,44 @@ def derive_seed(*keys, base=None):
     return _root_state.derive(base, keys).seed
 
 
+def root_seed():
+    """
+    Get the current root seed.
+
+    Returns:
+        numpy.random.SeedSequence:
+            The root seed.
+    """
+    return _root_state.seed
+
+
+def int_seed(words=None, seed=None):
+    """
+    Get the current root seed as an integer.
+
+    Args:
+        words(int or None):
+            The number of words of entropy to return, or ``None`` for a single integer.
+        seed(numpy.random.SeedSequence or None):
+            The seed; if ``None``, returns the root seed.
+
+    Returns:
+        int or numpy.ndarray:
+            The seed entropy.
+    """
+
+    if seed is None:
+        seed = _root_state.seed
+
+    if words is None:
+        return seed.generate_state(1)[0]
+    else:
+        return seed.generate_state(words)
+
+
 def numpy_rng(spec=None):
     """
-    Get a NumPy random number generator.  This is similar to :func:`sklearn.utils.check_random_seed`, but
+    Get a NumPy random number generator.  This is similar to :func:`sklearn.utils.check_random_state`, but
     it returns a :class:`numpy.random.Generator` instead.
 
     Args:
@@ -89,8 +124,8 @@ def numpy_rng(spec=None):
             * ``int``
             * ``None``
             * :class:`numpy.random.SeedSequence`
-            * :class:`numpy.random.mtrand.RandomState`
-            * :class:`numpy.random.Generator`
+            * :class:`numpy.random.RandomState` (its bit-generator is extracted and wrapped in a generator)
+            * :class:`numpy.random.Generator` (returned as-is)
 
     Returns:
         numpy.random.Generator: A random number generator.
@@ -108,7 +143,7 @@ def numpy_rng(spec=None):
 def numpy_random_state(spec=None):
     """
     Get a legacy NumPy random number generator (:class:`numpy.random.mtrand.RandomState`).
-    This is similar to :func:`sklearn.utils.check_random_seed`.
+    This is similar to :func:`sklearn.utils.check_random_state`.
 
     Args:
         spec:
