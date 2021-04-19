@@ -40,3 +40,9 @@ numba = ["numba"]
 torch = ["torch"]
 # cupy = ["cupy"]
 tf = ["tensorflow >=2,<3"]
+
+[tool.envtool.conda]
+name = "seedbank"
+channels = [
+    "conda-forge"
+]
