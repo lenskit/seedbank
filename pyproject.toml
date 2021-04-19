@@ -46,3 +46,6 @@ name = "seedbank"
 channels = [
     "conda-forge"
 ]
+
+[tool.envtool.conda.overrides]
+torch = "pytorch"
