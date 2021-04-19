@@ -56,7 +56,7 @@ def initialize(seed, *keys):
     for mod in SEED_INITIALIZERS:
         if isinstance(mod, str):
             mod = import_module(mod)
-        if mod.AVAILABLE:
+        if mod.is_available():
             mod.seed(_root_state)
 
     return _root_state.seed

@@ -2,11 +2,20 @@ import logging
 
 try:
     import tensorflow as tf
-    AVAILABLE = True
 except ImportError:
-    AVAILABLE = False
+    tf = None
 
 _log = logging.getLogger(__name__)
+
+
+def is_available():
+    if tf is None:
+        return False
+    elif hasattr(tf.random, 'set_seed'):
+        return True
+    else:
+        _log.warning('TensorFlow 1 cannot be seeded')
+        return False
 
 
 def seed(state):

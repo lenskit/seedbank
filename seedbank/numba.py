@@ -2,16 +2,20 @@ import logging
 import numpy as np
 try:
     from numba import njit
-    AVAILABLE = True
+    _available = True
 except ImportError:
-    AVAILABLE = False
+    _available = False
 
 _log = logging.getLogger(__name__)
 
-if AVAILABLE:
+if _available:
     @njit
     def _seed_numba(seed):
         np.random.seed(seed)
+
+
+def is_available():
+    return _available
 
 
 def seed(state):

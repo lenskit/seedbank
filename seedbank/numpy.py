@@ -1,8 +1,11 @@
 import logging
 import numpy as np
 
-AVAILABLE = True
 _log = logging.getLogger(__name__)
+
+
+def is_available():
+    return True
 
 
 def seed(state):

@@ -3,7 +3,10 @@ import random
 
 _log = logging.getLogger(__name__)
 
-AVAILABLE = True
+
+def is_available():
+    return True
+
 
 def seed(state):
     _log.debug('initializing stdlib seed')

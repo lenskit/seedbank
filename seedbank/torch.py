@@ -2,11 +2,14 @@ import logging
 
 try:
     import torch
-    AVAILABLE = True
 except ImportError:
-    AVAILABLE = False
+    torch = None
 
 _log = logging.getLogger(__name__)
+
+
+def is_available():
+    return torch is not None
 
 
 def seed(state):
