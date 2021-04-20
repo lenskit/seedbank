@@ -2,6 +2,7 @@ import numpy as np
 
 from seedbank._keys import make_key, make_seed
 
+
 class SeedState:
     """
     Manage a root seed and facilities to derive seeds.
