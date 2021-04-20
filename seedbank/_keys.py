@@ -1,6 +1,7 @@
 import hashlib
 import numpy as np
 
+
 def make_key(data):
     """
     Get a key, usable as entropy in a seed sequence, from a piece of data.

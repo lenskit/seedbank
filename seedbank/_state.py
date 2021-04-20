@@ -16,12 +16,25 @@ class SeedState:
 
     @property
     def seed(self) -> np.random.SeedSequence:
-        "Get the seed sequence for this seed."
+        "Get the seed sequence for this seed state."
         return self._seed
 
     @property
     def int_seed(self):
-        return self._seed.generate_state(1)[0]
+        "Get this seed as an integer."
+        self.entropy(1)[0]
+
+    def entropy(self, words):
+        """
+        Get *n* words of entropy as a NumPy array.
+
+        Args:
+            words(int): the number of words to return.
+
+        Returns:
+            numpy.ndarray: the entropy.
+        """
+        return self._seed.generate_state(words)
 
     def initialize(self, seed, keys):
         seed = make_seed(seed)
@@ -33,6 +46,20 @@ class SeedState:
         return seed
 
     def derive(self, base, keys=None):
+        """
+        Derive a new seed state.
+
+        Args:
+            base(seed-like):
+                The base seed.  If ``None``, use this seed state.
+            keys(list of seed-like):
+                Additional keys for deriving the seed.  If no keys are
+                provided, calls :meth:`numpy.random.SeedSequence.spawn` to
+                obtain a new RNG.
+
+        Returns:
+            SeedState: the derived seed state.
+        """
         if base is None:
             base = self.seed
         else:

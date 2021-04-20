@@ -15,7 +15,25 @@ The :py:func:`initialize` function initializes the root seed and seeds all suppo
 
 .. autofunction:: initialize
 
-Obtianing Seeds
+Seed Material
+-------------
+
+SeedBank seeds (either root seeds or keys for derived RNGs) can be specified in a number
+of formats.
+
+.. glossary::
+
+    seed-like
+        Data that can be used as seed material.  This includes:
+
+        - :py:class:`numpy.random.SeedSequence` (used as-is)
+        - :py:class:`int` (wrapped in a :py:class:`numpy.random.SeedSequence`)
+        - :py:class:`str` (encoded in UTF-8 and hashed)
+        - :py:class:`bytes` (hashed)
+        - :py:class:`numpy.ndarray` (converted to uint32)
+
+
+Obtaining Seeds
 ---------------
 
 .. autofunction:: root_seed

@@ -41,3 +41,7 @@ autodoc_default_options = {
     'members': True,
     'member-order': 'bysource'
 }
+
+napoleon_type_aliases = {
+    'seed-like': ':term:`seed-like`'
+}

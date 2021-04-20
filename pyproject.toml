@@ -23,8 +23,10 @@ requires = [
 
 [tool.flit.metadata.requires-extra]
 dev = [
+    "flit",
     "flake8",
     "ipython",
+    "sphinx-autobuild",
 ]
 test = [
     "pytest >= 6",
