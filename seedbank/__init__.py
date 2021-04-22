@@ -9,6 +9,7 @@ from importlib import import_module
 import numpy as np
 
 from seedbank._state import SeedState
+from seedbank._keys import make_seed
 
 _log = logging.getLogger(__name__)
 _root_state = SeedState()
@@ -139,9 +140,11 @@ def numpy_rng(spec=None):
         return spec
     elif isinstance(spec, np.random.RandomState):
         return np.random.Generator(spec._bit_generator)
+    elif spec is None:
+        return np.random.default_rng(derive_seed())
     else:
-        seed = _root_state.derive(spec)
-        return np.random.default_rng(seed.seed)
+        seed = make_seed(spec)
+        return np.random.default_rng(seed)
 
 
 def numpy_random_state(spec=None):
@@ -163,11 +166,12 @@ def numpy_random_state(spec=None):
         numpy.random.mtrand.RandomState: A random number generator.
     """
 
-    rng = None
     if isinstance(spec, np.random.RandomState):
         return spec
     elif isinstance(spec, np.random.Generator):
         return np.random.RandomState(spec._bit_generator)
+    elif spec is None:
+        return np.random.RandomState(int_seed(seed=derive_seed()))
     else:
-        seed = _root_state.derive(spec)
-        return np.random.RandomState(seed.int_seed)
+        seed = make_seed(spec)
+        return np.random.RandomState(int_seed(seed=seed))

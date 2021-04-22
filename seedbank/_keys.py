@@ -17,7 +17,7 @@ def make_key(data):
         return make_key(str.encode('utf8'))
 
     dt = type(data)
-    raise TypeError('invalid seed type {ot}')
+    raise TypeError(f'invalid seed type {dt}')
 
 
 def make_seed(data):
