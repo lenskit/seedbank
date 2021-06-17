@@ -6,7 +6,7 @@ build-backend = "flit_core.buildapi"
 module = "seedbank"
 author = "Michael Ekstrand"
 author-email = "michaelekstrand@boisestate.edu"
-home-page = "https://seedbank.lensit.org"
+home-page = "https://seedbank.lenskit.org"
 classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
