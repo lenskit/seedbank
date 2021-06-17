@@ -21,6 +21,10 @@ requires = [
     "numpy >=1.17"
 ]
 
+[tool.flit.metadata.urls]
+Documentation = "https://seedbank.lenskit.org/en/latest/"
+GitHub = "https://github.com/lenskit/seedbank"
+
 [tool.flit.metadata.requires-extra]
 dev = [
     "flit",
