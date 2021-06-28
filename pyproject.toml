@@ -39,7 +39,7 @@ test = [
     # "hypothesis",
 ]
 doc = [
-    "sphinx",
+    "sphinx >=4",
     "furo",
 ]
 numba = ["numba"]
