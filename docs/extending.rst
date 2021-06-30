@@ -18,7 +18,7 @@ The RNG seeding interface consists of two functions:
     This function should return a boolean indicating whether or not the RNG is available for seeding.
 
 
-.. py:function:: seed(state) -> seedbank.SeedState
+.. py:function:: seed(state: seedbank.SeedState)
 
     This function takes an RNG seed state (implemented by :py:class:`SeedState`) and seeds the specified
     RNG.  It is allowed to fail if :py:func:`is_avialable` returns ``False``.
