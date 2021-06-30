@@ -159,11 +159,11 @@ def numpy_random_state(spec=None):
             * ``int``
             * ``None``
             * :class:`numpy.random.SeedSequence`
-            * :class:`numpy.random.mtrand.RandomState`
+            * :class:`numpy.random.RandomState`
             * :class:`numpy.random.Generator`
 
     Returns:
-        numpy.random.mtrand.RandomState: A random number generator.
+        numpy.random.RandomState: A random number generator.
     """
 
     if isinstance(spec, np.random.RandomState):
