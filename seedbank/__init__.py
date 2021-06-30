@@ -38,7 +38,7 @@ def initialize(seed, *keys):
     a seed derived from the specified seed.
 
     If you do **not** call this function, a default root seed is used, so functions like
-    :func:`derive_seed` and :func:`numba_rng` work, but all other random number generators
+    :func:`derive_seed` and :func:`numpy_rng` work, but all other random number generators
     are left to their own default seeding behavior.
 
     Args:
@@ -101,7 +101,7 @@ def int_seed(words=None, seed=None):
         words(int or None):
             The number of words of entropy to return, or ``None`` for a single integer.
         seed(numpy.random.SeedSequence or None):
-            The seed; if ``None``, returns the root seed.
+            An alternate seed to convert to an ingeger; if ``None``, returns the root seed.
 
     Returns:
         int or numpy.ndarray:
