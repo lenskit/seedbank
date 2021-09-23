@@ -14,7 +14,7 @@ def make_key(data):
         h = hashlib.md5(data)
         return np.frombuffer(h.digest(), np.uint32)
     if isinstance(data, str):
-        return make_key(str.encode('utf8'))
+        return make_key(data.encode('utf8'))
 
     dt = type(data)
     raise TypeError(f'invalid seed type {dt}')
