@@ -36,6 +36,12 @@ virtual environment:
     python -m pip install flit
     flit install --pth-file
 
-If you want to use a Conda environment for development, use:
+[conda-lock][] can help you set up a Conda environment (replace `linux-64` with your platform):
 
-    python build-tools/flit-conda --create-env --python-version 3.8
+    # install conda-lock in base environment
+    # alternatively: pip install conda-lock
+    conda install -c conda-forge conda-lock
+    # create the lock file
+    conda-lock -p linux-64 -f pyproject.toml
+    # create the environment
+    conda env create -n seedbank -f conda-linux-64.lock
