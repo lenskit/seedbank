@@ -1,6 +1,7 @@
 from seedbank import derive_seed, initialize, _root_state, root_seed, int_seed
 from seedbank._keys import make_key
 
+
 def test_initialize():
     initialize(42)
     assert _root_state.seed.entropy == 42
