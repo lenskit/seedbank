@@ -63,6 +63,13 @@ def initialize(seed, *keys):
     return _root_state.seed
 
 
+def init_file(file, *keys, path='random.seed'):
+    """
+    Initialize the random infrastructure with a seed loaded from a file.  It supports YAML and
+    TOML files, and requires an appropriate parser installed.
+    """
+
+
 def derive_seed(*keys, base=None):
     """
     Derive a seed from the root seed, optionally with additional seed keys.

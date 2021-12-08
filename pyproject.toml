@@ -35,7 +35,9 @@ dev = [
 test = [
     "pytest >= 6",
     "pytest-doctestplus",
-    "pytest-cov"
+    "pytest-cov",
+    "pyyaml",
+    "tomli",
     # "hypothesis",
 ]
 doc = [
