@@ -47,11 +47,7 @@ torch = ["torch"]
 # cupy = ["cupy"]
 tf = ["tensorflow >=2,<3"]
 
-[tool.envtool.conda]
-name = "seedbank"
+[tool.conda-lock]
 channels = [
     "conda-forge"
 ]
-
-[tool.envtool.conda.overrides]
-torch = "pytorch"
