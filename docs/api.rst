@@ -15,6 +15,8 @@ The :py:func:`initialize` function initializes the root seed and seeds all suppo
 
 .. autofunction:: initialize
 
+.. autofunction:: init_file
+
 Seed Material
 -------------
 
