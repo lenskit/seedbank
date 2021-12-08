@@ -1,34 +1,36 @@
 [build-system]
-requires = ["flit_core >=2,<4"]
+requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
-[tool.flit.metadata]
-module = "seedbank"
-author = "Michael Ekstrand"
-author-email = "michaelekstrand@boisestate.edu"
-home-page = "https://seedbank.lenskit.org"
+[project]
+name = "seedbank"
+authors = [
+    {name="Michael Ekstrand", email="michaelekstrand@boisestate.edu"}
+]
 classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Operating System :: OS Independent",
 ]
 requires-python = ">= 3.7"
-description-file = "README.md"
-requires = [
+readme = "README.md"
+dynamic = ["version", "description"]
+dependencies = [
     "numpy >=1.17",
     "anyconfig",
 ]
 
-[tool.flit.metadata.urls]
-Documentation = "https://seedbank.lenskit.org/en/latest/"
+[project.urls]
+Homepage = "https://seedbank.lenksit.org"
 GitHub = "https://github.com/lenskit/seedbank"
 
-[tool.flit.metadata.requires-extra]
+[project.optional-dependencies]
 dev = [
-    "flit",
+    "flit >=3.2",
     "flake8",
     "ipython",
     "sphinx-autobuild",
