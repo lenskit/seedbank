@@ -18,6 +18,7 @@ classifiers = [
 ]
 requires-python = ">= 3.7"
 readme = "README.md"
+dynamic = ["version", "description"]
 dependencies = [
     "numpy >=1.17",
     "anyconfig",
