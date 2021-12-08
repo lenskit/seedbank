@@ -31,6 +31,8 @@ dev = [
     "flake8",
     "ipython",
     "sphinx-autobuild",
+    "invoke",
+    "conda-lock",
 ]
 test = [
     "pytest >= 6",
