@@ -18,7 +18,8 @@ classifiers = [
 requires-python = ">= 3.7"
 description-file = "README.md"
 requires = [
-    "numpy >=1.17"
+    "numpy >=1.17",
+    "anyconfig",
 ]
 
 [tool.flit.metadata.urls]

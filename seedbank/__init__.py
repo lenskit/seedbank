@@ -65,9 +65,44 @@ def initialize(seed, *keys):
 
 def init_file(file, *keys, path='random.seed'):
     """
-    Initialize the random infrastructure with a seed loaded from a file.  It supports YAML and
-    TOML files, and requires an appropriate parser installed.
+    Initialize the random infrastructure with a seed loaded from a file. The loaded seed is
+    passed to :func:`initialize`, along with any additional RNG key material.
+
+    With the default ``path``, the seed can be configured from a TOML file as follows:
+
+    .. code-block:: toml
+
+        [random]
+        seed = 2308410
+
+    And then initialized::
+
+        seedbank.init_file('params.toml')
+
+    Any file type supported by anyconfig_ can be used, including TOML, YAML, and JSON.
+
+    .. _anyconfig: https://github.com/ssato/python-anyconfig
+
+    Args:
+        file(str or pathlib.Path):
+            The filename for the configuration file to load.
+        keys(list of int or str):
+            Aditional key material.
+        path(str):
+            The path within the configuration file or object in which the seed is stored.
+            Can be multiple keys separated with '.'.
     """
+    import anyconfig
+    _log.info('loading seed from %s (key=%s)', file, path)
+
+    config = anyconfig.load(file)
+
+    kps = path.split('.')
+    seed = config
+    for k in kps:
+        seed = seed[k]
+
+    initialize(seed, *keys)
 
 
 def derive_seed(*keys, base=None):
