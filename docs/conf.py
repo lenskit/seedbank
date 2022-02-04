@@ -15,6 +15,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
+    'sphinxext.opengraph',
 ]
 
 source_suffix = '.rst'

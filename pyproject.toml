@@ -47,6 +47,7 @@ test = [
 ]
 doc = [
     "sphinx >=4",
+    "sphinxext-opengraph >= 0.5",
     "furo",
 ]
 numba = ["numba"]
