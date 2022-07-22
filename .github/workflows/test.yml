@@ -29,30 +29,11 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Set up Python ${{matrix.python}}
-      uses: actions/setup-python@v2
+    - name: Set up Python
+      uses: lenskit/lkbuild/actions/setup-vanilla-env@main
       with:
         python-version: ${{matrix.python}}
-
-    - name: Discover Pip cache
-      id: pip-cache
-      run: |
-        echo "::set-output name=dir::$(pip cache dir)"
-      shell: bash
-
-    - name: Cache Pip wheels
-      uses: actions/cache@v1
-      with:
-        path: ${{ steps.pip-cache.outputs.dir }}
-        key: ${{ matrix.platform }}-py${{ matrix.python }}-pip-${{ hashFiles('*.egg-info/requires.txt')}}
-
-    - name: Install meta-deps
-      run: |
-        pip install -U flit
-
-    - name: Install package deps
-      run: |
-        flit install --pth-file --deps=develop
+        install-with: flit
 
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
@@ -77,30 +58,12 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+    - name: Set up Python
+      uses: lenskit/lkbuild/actions/setup-vanilla-env@main
       with:
         python-version: "3.8"
-
-    - name: Discover Pip cache
-      id: pip-cache
-      run: |
-        echo "::set-output name=dir::$(pip cache dir)"
-      shell: bash
-
-    - name: Cache Pip wheels
-      uses: actions/cache@v1
-      with:
-        path: ${{ steps.pip-cache.outputs.dir }}
-        key: ubuntu-py38-${{matrix.extra}}-pip-${{ hashFiles('*.egg-info/requires.txt')}}
-
-    - name: Install meta-deps
-      run: |
-        pip install -U flit
-
-    - name: Install package deps
-      run: |
-        flit install --pth-file --deps=develop --extras ${{matrix.extra}}
+        install-with: flit
+        extras: ${{matrix.extra}}
 
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
