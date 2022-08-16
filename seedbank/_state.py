@@ -23,7 +23,7 @@ class SeedState:
     @property
     def int_seed(self):
         "Get this seed as an integer."
-        return self.entropy(1)[0]
+        return int(self.entropy(1)[0])
 
     def entropy(self, words):
         """
