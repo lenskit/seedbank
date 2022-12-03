@@ -36,7 +36,7 @@ intersphinx_mapping = {
     'numba': ('https://numba.readthedocs.io/en/stable/', None),
     'sklearn': ('https://scikit-learn.org/stable/', None),
     'torch': ('https://pytorch.org/docs/stable/', None),
-    'cupy': ('https://docs.cupy.dev/en/stable/reference/', None),
+    'cupy': ('https://docs.cupy.dev/en/stable/', None),
 }
 
 autodoc_default_options = {
