@@ -18,7 +18,8 @@ __all__ = [
     'initialize',
     'derive_seed',
     'numpy_rng',
-    'numpy_random_state'
+    'numpy_random_state',
+    'cupy_rng',
 ]
 
 # This list contains the modules that initialize seeds.
@@ -26,6 +27,7 @@ SEED_INITIALIZERS = [
     'seedbank.stdlib',
     'seedbank.numpy',
     'seedbank.numba',
+    'seedbank.cupy',
     'seedbank.tensorflow',
     'seedbank.torch',
 ]
@@ -217,3 +219,32 @@ def numpy_random_state(spec=None):
     else:
         seed = make_seed(spec)
         return np.random.RandomState(int_seed(seed=seed))
+
+
+def cupy_rng(spec=None):
+    """
+    Get a CuPy random number generator.  This works like :func:`numpy_rng`, but
+    it returns a :class:`cupy.random.Generator` instead.
+
+    Args:
+        spec:
+            The spec for this RNG.  Can be any of the following types:
+
+            * ``int``
+            * ``None``
+            * :class:`numpy.random.SeedSequence`
+            * :class:`numpy.random.RandomState` (its bit-generator is extracted and wrapped in a generator)
+            * :class:`numpy.random.Generator` (returned as-is)
+
+    Returns:
+        cupy.random.Generator: A random number generator.
+    """
+    import cupy
+
+    if isinstance(spec, cupy.random.Generator):
+        return spec
+    elif spec is None:
+        return cupy.random.default_rng(derive_seed())
+    else:
+        seed = make_seed(spec)
+        return cupy.random.default_rng(seed)

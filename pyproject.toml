@@ -52,7 +52,7 @@ doc = [
 ]
 numba = ["numba"]
 torch = ["torch"]
-# cupy = ["cupy"]
+cupy = ["cupy"]
 tf = ["tensorflow >=2,<3"]
 
 [tool.conda-lock]
