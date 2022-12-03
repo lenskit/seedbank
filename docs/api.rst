@@ -63,3 +63,4 @@ use these functions to obtain random number generators.
 
 .. autofunction:: numpy_rng
 .. autofunction:: numpy_random_state
+.. autofunction:: cupy_rng
