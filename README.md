@@ -20,9 +20,10 @@ SeedBank will seed all of the known generators that will be available, including
 
 - Python standard random
 - NumPy legacy random `numpy.random`
-- PyTorch (with torch.manual_seed())
+- PyTorch (with `torch.manual_seed()`)
 - Numba’s NumPy random
-- TensorFlow (with tf.random.set_seed())
+- TensorFlow (with `tf.random.set_seed()`)
+- cupy (with `cupy.random.seed()`)
 
 In addition, it will initialize a root seed for constructing new-style NumPy `Generator` instances.
 
