@@ -21,7 +21,7 @@ readme = "README.md"
 dynamic = ["version", "description"]
 dependencies = [
     "numpy >=1.17",
-    "anyconfig",
+    "anyconfig ==0.13.*",
 ]
 
 [project.urls]
@@ -42,7 +42,7 @@ test = [
     "pytest-doctestplus",
     "pytest-cov",
     "pyyaml",
-    "tomli",
+    "toml",
     # "hypothesis",
 ]
 doc = [
