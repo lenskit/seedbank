@@ -54,7 +54,7 @@ jobs:
         extra:
         - numba
         - torch
-        # - cupy
+        - cupy
         - tf
 
     steps:
