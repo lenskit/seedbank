@@ -30,7 +30,7 @@ jobs:
         - "3.11"
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
@@ -43,8 +43,8 @@ jobs:
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
 
-    - name: Upload coverage
-      uses: codecov/codecov-action@v1
+    - name: Save test results
+      uses: lenskit/lkbuild/actions/save-test-results@main
 
   test-extra:
     name: Test single extra ${{matrix.extra}}
@@ -59,7 +59,7 @@ jobs:
         - tf
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
@@ -73,8 +73,22 @@ jobs:
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
 
-    - name: Upload coverage
-      uses: codecov/codecov-action@v1
+    - name: Save test results
+      uses: lenskit/lkbuild/actions/save-test-results@main
+
+  report:
+    name: Process test results
+    runs-on: ubuntu-latest
+    needs: [test, test-extra]
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Report test results
+      uses: lenskit/lkbuild/actions/report-test-results@main
+
 
   sdist:
     name: Build and Publish Packages
@@ -82,7 +96,7 @@ jobs:
     needs: [test, test-extra]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
@@ -90,7 +104,7 @@ jobs:
       run: git fetch --tags
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: 3.8
 
@@ -101,7 +115,7 @@ jobs:
       run: flit build
 
     - name: Save archive
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
         name: pypi-pkgs
         path: dist
