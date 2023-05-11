@@ -45,6 +45,8 @@ jobs:
 
     - name: Save test results
       uses: lenskit/lkbuild/actions/save-test-results@main
+      with:
+        artifact-name: test-${{matrix.platform}}-py${{matrix.python}}
 
   test-extra:
     name: Test single extra ${{matrix.extra}}
@@ -75,6 +77,8 @@ jobs:
 
     - name: Save test results
       uses: lenskit/lkbuild/actions/save-test-results@main
+      with:
+        artifact-name: test-extra-${{matrix.extra}}
 
   report:
     name: Process test results
