@@ -39,6 +39,7 @@ jobs:
       with:
         python-version: ${{matrix.python}}
         install-with: flit
+        preinstall-helpers: false
 
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
