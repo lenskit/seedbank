@@ -29,6 +29,7 @@ dependencies = [
 dev = [
   "flit >=3.2",
   "ruff",
+  "copier",
   "ipython",
   "sphinx-autobuild",
 ]
