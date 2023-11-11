@@ -1,6 +1,6 @@
 # Changes here will be overwritten by Copier
 _commit: 2b011dc
-_src_path: lk-project-template/
+_src_path: https://github.com/lenskit/lk-project-template.git
 package_name: seedbank
 project_name: seedbank
 require_lint: true
