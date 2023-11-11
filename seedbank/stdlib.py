@@ -9,5 +9,5 @@ def is_available():
 
 
 def seed(state):
-    _log.debug('initializing stdlib seed')
+    _log.debug("initializing stdlib seed")
     random.seed(state.int_seed)

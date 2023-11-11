@@ -13,5 +13,5 @@ def is_available():
 
 
 def seed(state):
-    _log.debug('initializing CuPy root RNG')
+    _log.debug("initializing CuPy root RNG")
     cupy.random.seed(state.int_seed)

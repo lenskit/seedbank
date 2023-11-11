@@ -1,13 +1,16 @@
 import numpy as np
 from seedbank import numpy_random_state
 
+
 def test_random_state():
     rng = numpy_random_state()
     assert isinstance(rng, np.random.RandomState)
 
 
 def test_random_state_seed():
-    rng = numpy_random_state(42, )
+    rng = numpy_random_state(
+        42,
+    )
     assert isinstance(rng, np.random.RandomState)
 
 

@@ -4,9 +4,10 @@ import numpy as np
 try:
     import cupy
 except ImportError:
-    pytestmark = mark.skip('cupy not available')
+    pytestmark = mark.skip("cupy not available")
 
 from seedbank import cupy_rng
+
 
 def test_generator():
     rng = cupy_rng()

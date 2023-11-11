@@ -10,7 +10,7 @@ try:
         return np.random.randint(10000)
 
 except ImportError:
-    pytestmark = pytest.mark.skip('Numba JIT not available')
+    pytestmark = pytest.mark.skip("Numba JIT not available")
 
 
 def test_numba_init():

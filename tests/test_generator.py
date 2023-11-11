@@ -2,6 +2,7 @@ import numpy as np
 
 from seedbank import numpy_rng
 
+
 def test_generator():
     rng = numpy_rng()
     assert isinstance(rng, np.random.Generator)
@@ -16,6 +17,7 @@ def test_generator_seed_seq():
     seq = np.random.SeedSequence(42)
     rng = numpy_rng(seq)
     assert isinstance(rng, np.random.Generator)
+
 
 def test_generator_convert_from_rs():
     rng1 = np.random.RandomState()

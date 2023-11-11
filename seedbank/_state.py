@@ -76,7 +76,7 @@ class SeedState:
 
     def rng(self, seed=None):
         if seed is None:
-            seed, = self.seed.spawn(1)
+            (seed,) = self.seed.spawn(1)
         elif not isinstance(seed, np.random.SeedSequence):
             seed = np.random.SeedSequence(make_key)
         return np.random.default_rng(seed)

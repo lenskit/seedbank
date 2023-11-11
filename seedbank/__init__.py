@@ -2,7 +2,7 @@
 Common infrastructure for initializing random number generators.
 """
 
-__version__ = '0.1.3'
+__version__ = "0.1.3"
 
 import logging
 from importlib import import_module
@@ -15,21 +15,21 @@ _log = logging.getLogger(__name__)
 _root_state = SeedState()
 
 __all__ = [
-    'initialize',
-    'derive_seed',
-    'numpy_rng',
-    'numpy_random_state',
-    'cupy_rng',
+    "initialize",
+    "derive_seed",
+    "numpy_rng",
+    "numpy_random_state",
+    "cupy_rng",
 ]
 
 # This list contains the modules that initialize seeds.
 SEED_INITIALIZERS = [
-    'seedbank.stdlib',
-    'seedbank.numpy',
-    'seedbank.numba',
-    'seedbank.cupy',
-    'seedbank.tensorflow',
-    'seedbank.torch',
+    "seedbank.stdlib",
+    "seedbank.numpy",
+    "seedbank.numba",
+    "seedbank.cupy",
+    "seedbank.tensorflow",
+    "seedbank.torch",
 ]
 
 
@@ -54,7 +54,7 @@ def initialize(seed, *keys):
             The random seed.
     """
     _root_state.initialize(seed, keys)
-    _log.info('initialized root seed %s', _root_state.seed)
+    _log.info("initialized root seed %s", _root_state.seed)
 
     for mod in SEED_INITIALIZERS:
         if isinstance(mod, str):
@@ -65,7 +65,7 @@ def initialize(seed, *keys):
     return _root_state.seed
 
 
-def init_file(file, *keys, path='random.seed'):
+def init_file(file, *keys, path="random.seed"):
     """
     Initialize the random infrastructure with a seed loaded from a file. The loaded seed is
     passed to :func:`initialize`, along with any additional RNG key material.
@@ -95,11 +95,12 @@ def init_file(file, *keys, path='random.seed'):
             Can be multiple keys separated with '.'.
     """
     import anyconfig
-    _log.info('loading seed from %s (key=%s)', file, path)
+
+    _log.info("loading seed from %s (key=%s)", file, path)
 
     config = anyconfig.load(file)
 
-    kps = path.split('.')
+    kps = path.split(".")
     seed = config
     for k in kps:
         seed = seed[k]
