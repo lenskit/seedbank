@@ -42,7 +42,7 @@ jobs:
     - name: Set up dev environment
       run: |
         pip install 'flit>=3.8'
-        flit install --only-deps --extras test
+        flit install --only-deps --deps production --extras test
 
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
@@ -77,7 +77,7 @@ jobs:
     - name: Set up dev environment
       run: |
         pip install 'flit>=3.8'
-        flit install --only-deps --extras "test,${{matrix.extra}}"
+        flit install --only-deps --deps production --extras "test,${{matrix.extra}}"
 
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
