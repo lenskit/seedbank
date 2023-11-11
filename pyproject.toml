@@ -28,11 +28,9 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "flit >=3.2",
-  "flake8",
+  "ruff",
   "ipython",
   "sphinx-autobuild",
-  "invoke",
-  "conda-lock",
 ]
 test = [
   "pytest >= 6",
