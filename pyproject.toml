@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "seedbank"
 authors = [
-    {name="Michael Ekstrand", email="michaelekstrand@boisestate.edu"}
+  {name="Michael Ekstrand", email="mdekstrand@drexel.edu"}
 ]
 classifiers = [
     "License :: OSI Approved :: MIT License",
@@ -21,17 +21,13 @@ requires-python = ">= 3.7"
 readme = "README.md"
 dynamic = ["version", "description"]
 dependencies = [
-    "numpy >=1.17",
-    "anyconfig ==0.13.*",
+  "numpy >=1.17",
+  "anyconfig ==0.13.*",
 ]
-
-[project.urls]
-Homepage = "https://seedbank.lenksit.org"
-GitHub = "https://github.com/lenskit/seedbank"
 
 [project.optional-dependencies]
 dev = [
-    "flit >=3.2",
+"flit >=3.2",
     "flake8",
     "ipython",
     "sphinx-autobuild",
@@ -39,7 +35,7 @@ dev = [
     "conda-lock",
 ]
 test = [
-    "pytest >= 6",
+"pytest >= 6",
     "pytest-doctestplus",
     "pytest-cov",
     "pyyaml",
@@ -47,7 +43,7 @@ test = [
     # "hypothesis",
 ]
 doc = [
-    "sphinx >=4",
+"sphinx >=4",
     "sphinxext-opengraph >= 0.5",
     "furo",
 ]
@@ -57,5 +53,20 @@ cupy = ["cupy"]
 cuda11x = ["cupy-cuda11x"]
 tf = ["tensorflow >=2,<3"]
 
+[project.urls]
+Homepage = "https://seedbank.lenksit.org"
+GitHub = "https://github.com/lenskit/seedbank"
+
 [tool.pyproject2conda]
 channels = ["conda-forge"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+exclude = [
+  ".git",
+  "__pycache__",
+  "docs/conf.py",
+  "build",
+  "dist",
+]

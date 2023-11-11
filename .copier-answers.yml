@@ -1,0 +1,7 @@
+# Changes here will be overwritten by Copier
+_commit: 2b011dc
+_src_path: lk-project-template/
+package_name: seedbank
+project_name: seedbank
+require_lint: true
+start_year: 2021

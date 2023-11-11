@@ -1,8 +1,50 @@
-/build/
-/dist/
+# log and debug outputs
+*.log
+*.pdb
+*.prof
+*.lprof
+emissions.csv
+intel_power_gadget_log.csv
+.coverage*
+coverage.xml
+cov-reports/
+test-logs/
+htmlcov/
+
+# caches and working directories
 __pycache__/
 *.pyc
-*.pyo
+.ipynb_checkpoints/
+dask-worker-space/
+.idea/
+.*_cache/
+.hypothesis/
+.tox/
+.vagrant/
 .venv/
+scratch/
+
+# build outputs
+build/
+dist/
+*.pyd
+*.so
+*.dll
+*.exp
+*.lib
+*.o
+*.obj
+
+# environment locks that aren't committed
+/*env*.yml
+conda-lock.yml
 *.lock
 *.lock.yml
+
+# Editor and OS cruft
+.DS_Store
+._.DS_Store
+*~
+*.tmp
+.vs/
+.vscode/
