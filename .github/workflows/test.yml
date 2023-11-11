@@ -35,11 +35,14 @@ jobs:
         fetch-depth: 0
 
     - name: Set up Python
-      uses: lenskit/lkbuild/actions/setup-vanilla-env@main
+      uses: actions/setup-python@v4
       with:
         python-version: ${{matrix.python}}
-        install-with: flit
-        preinstall-helpers: false
+
+    - name: Set up dev environment
+      run: |
+        pip install 'flit>=3.8'
+        flit install --only-deps -e test
 
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
@@ -67,11 +70,14 @@ jobs:
         fetch-depth: 0
 
     - name: Set up Python
-      uses: lenskit/lkbuild/actions/setup-vanilla-env@main
+      uses: actions/setup-python@v4
       with:
-        python-version: "3.8"
-        install-with: flit
-        extras: ${{matrix.extra}}
+        python-version: 3.11
+
+    - name: Set up dev environment
+      run: |
+        pip install 'flit>=3.8'
+        flit install --only-deps -e test -e ${{matrix.extra}}
 
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
