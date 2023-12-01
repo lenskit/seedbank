@@ -1,7 +1,8 @@
 # Changes here will be overwritten by Copier
-_commit: 9d9eb55
+_commit: 3f4b9e0
 _src_path: https://github.com/lenskit/lk-project-template.git
 package_name: seedbank
 project_name: seedbank
+project_title: SeedBank
 require_lint: true
 start_year: 2021

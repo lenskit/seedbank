@@ -1,49 +1,40 @@
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath(".."))
 
 import seedbank
 
-project = 'SeedBank'
-copyright = '2021 Boise State University'
-author = 'Michael D. Ekstrand'
+project = "SeedBank""
+copyright = "2023 Michael Ekstrand"
+author = "Michael D. Ekstrand"
 
 release = seedbank.__version__
 
 extensions = [
-    'sphinx.ext.napoleon',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.intersphinx',
-    'sphinxext.opengraph',
+    "sphinx.ext.napoleon",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.intersphinx",
+    "sphinxext.opengraph",
 ]
 
-source_suffix = '.rst'
+source_suffix = ".rst"
 
-pygments_style = 'sphinx'
-highlight_language = 'python3'
+pygments_style = "sphinx"
+highlight_language = "python3"
 
-html_theme = 'furo'
+html_theme = "furo"
 html_theme_options = {
-    # 'github_user': 'lenskit',
-    # 'github_repo': 'seedbank',
 }
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/3/', None),
-    'numpy': ('https://docs.scipy.org/doc/numpy/', None),
-    'numba': ('https://numba.readthedocs.io/en/stable/', None),
-    'sklearn': ('https://scikit-learn.org/stable/', None),
-    'torch': ('https://pytorch.org/docs/stable/', None),
-    'cupy': ('https://docs.cupy.dev/en/stable/', None),
+    "python": ("https://docs.python.org/3/", None),
+    "numpy": ("https://docs.scipy.org/doc/numpy/", None),
+    "sklearn": ("https://scikit-learn.org/stable/", None),
 }
 
 autodoc_default_options = {
-    'members': True,
-    'member-order': 'bysource'
-}
-
-napoleon_type_aliases = {
-    'seed-like': ':term:`seed-like`'
+    "members": True,
+    "member-order": "bysource"
 }

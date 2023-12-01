@@ -47,4 +47,3 @@ conda-lock.yml
 *~
 *.tmp
 .vs/
-.vscode/

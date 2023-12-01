@@ -1,6 +1,6 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "seedbank"
@@ -10,9 +10,6 @@ authors = [
 classifiers = [
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.7",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -20,6 +17,7 @@ classifiers = [
 ]
 requires-python = ">= 3.7"
 readme = "README.md"
+license = { file = "LICENSE.md" }
 dynamic = ["version", "description"]
 dependencies = [
   "numpy >=1.17",
@@ -28,14 +26,15 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-  "flit >=3.2",
+  "setuptools>=64",
+  "setuptools_scm>=8",
   "ruff",
   "copier",
   "ipython",
   "sphinx-autobuild",
 ]
 test = [
-  "pytest >= 6",
+  "pytest >= 7",
   "pytest-doctestplus",
   "pytest-cov",
   "pyyaml",
@@ -43,7 +42,7 @@ test = [
   # "hypothesis",
 ]
 doc = [
-  "sphinx >=4",
+  "sphinx >=4.2",
   "sphinxext-opengraph >= 0.5",
   "furo",
 ]
@@ -57,6 +56,14 @@ tf = ["tensorflow >=2,<3"]
 Homepage = "https://seedbank.lenksit.org"
 GitHub = "https://github.com/lenskit/seedbank"
 
+# configure build tools
+[tool.setuptools]
+packages = ["seedbank"]
+
+[tool.setuptools_scm]
+version_scheme = "release-branch-semver"
+
+# settings for generating conda environments for dev & CI, when needed
 [tool.pyproject2conda]
 channels = ["conda-forge"]
 
