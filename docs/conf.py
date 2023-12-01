@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.abspath(".."))
 
 import seedbank
 
-project = "SeedBank""
+project = "SeedBank"
 copyright = "2023 Michael Ekstrand"
 author = "Michael D. Ekstrand"
 
