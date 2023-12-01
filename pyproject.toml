@@ -4,6 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "seedbank"
+description = "Common infrastructure for initializing random number generators."
 authors = [
   {name="Michael Ekstrand", email="mdekstrand@drexel.edu"}
 ]
@@ -18,7 +19,7 @@ classifiers = [
 requires-python = ">= 3.7"
 readme = "README.md"
 license = { file = "LICENSE.md" }
-dynamic = ["version", "description"]
+dynamic = ["version"]
 dependencies = [
   "numpy >=1.17",
   "anyconfig ==0.13.*",
