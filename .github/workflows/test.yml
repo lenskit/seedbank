@@ -42,8 +42,7 @@ jobs:
 
     - name: Set up dev environment
       run: |
-        pip install 'flit>=3.8'
-        flit install --only-deps --deps production --extras test
+        pip install -e '.[test]'
 
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
@@ -77,8 +76,7 @@ jobs:
 
     - name: Set up dev environment
       run: |
-        pip install 'flit>=3.8'
-        flit install --only-deps --deps production --extras "test,${{matrix.extra}}"
+        pip install -e '.[test,${{matrix.extra}}]'
 
     - name: Run tests
       run: python -m pytest --cov=seedbank --cov-report=xml tests
@@ -121,10 +119,10 @@ jobs:
         python-version: 3.8
 
     - name: Install Python deps
-      run: pip install -U flit
+      run: pip install -U build
 
     - name: Build distribution
-      run: flit build
+      run: python -m build
 
     - name: Save archive
       uses: actions/upload-artifact@v3
@@ -138,9 +136,9 @@ jobs:
     - name: Publish PyPI packages
       if: github.event_name == 'release'
       run: |
-        flit publish
+        twine upload dist/*
       shell: bash
       env:
         TWINE_NON_INTERACTIVE: y
-        FLIT_USERNAME: __token__
-        FLIT_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
