@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "seedbank"
-description = "Common infrastructure for initializing random number generators."
+description = "Common infrastructure for seeding random number generators."
 authors = [
   {name="Michael Ekstrand", email="mdekstrand@drexel.edu"}
 ]
