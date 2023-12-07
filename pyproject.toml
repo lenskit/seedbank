@@ -31,6 +31,8 @@ dependencies = [
 dev = [
   "setuptools>=64",
   "setuptools_scm>=8",
+  "build",
+  "twine",
   "ruff",
   "copier",
   "ipython",

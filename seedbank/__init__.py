@@ -2,14 +2,20 @@
 Common infrastructure for initializing random number generators.
 """
 
-__version__ = "0.1.3"
-
 import logging
 from importlib import import_module
 import numpy as np
 
 from seedbank._state import SeedState
 from seedbank._keys import make_seed
+
+from importlib.metadata import version, PackageNotFoundError
+
+try:
+    __version__ = version("seedbank")
+except PackageNotFoundError:
+    # package is not installed
+    pass
 
 _log = logging.getLogger(__name__)
 _root_state = SeedState()
