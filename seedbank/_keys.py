@@ -32,7 +32,7 @@ def make_key(data: RNGKey, single: bool = False) -> Entropy:
         return int(data)
     if isinstance(data, np.ndarray):
         if single:
-            return make_key(memoryview(data), single)
+            return make_key(memoryview(data), True)
         else:
             return data.astype(np.uint32)
     if isinstance(data, (bytes, memoryview)):
