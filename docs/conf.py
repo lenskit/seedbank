@@ -38,3 +38,4 @@ autodoc_default_options = {
     "members": True,
     "member-order": "bysource"
 }
+autodoc_typehints = "description"
