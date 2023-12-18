@@ -242,7 +242,8 @@ def cupy_rng(spec=None):
             * ``int``
             * ``None``
             * :class:`numpy.random.SeedSequence`
-            * :class:`numpy.random.RandomState` (its bit-generator is extracted and wrapped in a generator)
+            * :class:`numpy.random.RandomState` (its bit-generator is extracted
+              and wrapped in a generator)
             * :class:`numpy.random.Generator` (returned as-is)
 
     Returns:
