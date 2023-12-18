@@ -7,7 +7,6 @@ from __future__ import annotations
 import logging
 from importlib import import_module
 from importlib.metadata import PackageNotFoundError, version
-from os import PathLike
 from types import ModuleType
 
 import numpy as np
@@ -28,6 +27,7 @@ _root_state = SeedState()
 __all__ = [
     "make_seed",
     "initialize",
+    "init_file",
     "derive_seed",
     "numpy_rng",
     "numpy_random_state",
@@ -74,52 +74,6 @@ def initialize(seed: SeedLike, *keys: RNGKey):
             mod.seed(_root_state)
 
     return _root_state.seed
-
-
-def init_file(
-    file: str | bytes | PathLike[str] | PathLike[bytes], *keys: RNGKey, path: str = "random.seed"
-):
-    """
-    Initialize the random infrastructure with a seed loaded from a file. The loaded seed is
-    passed to :func:`initialize`, along with any additional RNG key material.
-
-    With the default ``path``, the seed can be configured from a TOML file as follows:
-
-    .. code-block:: toml
-
-        [random]
-        seed = 2308410
-
-    And then initialized::
-
-        seedbank.init_file('params.toml')
-
-    Any file type supported by anyconfig_ can be used, including TOML, YAML, and JSON.
-
-    .. _anyconfig: https://github.com/ssato/python-anyconfig
-
-    Args:
-        file:
-            The filename for the configuration file to load.
-        keys:
-            Aditional key material.
-        path:
-            The path within the configuration file or object in which the seed is stored.
-            Can be multiple keys separated with '.'.
-    """
-    import anyconfig
-
-    _log.info("loading seed from %s (key=%s)", file, path)
-
-    config = anyconfig.load(file)  # type: ignore
-
-    kps = path.split(".")
-
-    cvar = config
-    for k in kps:
-        cvar = cvar[k]  # type: ignore
-
-    initialize(cvar, *keys)  # type: ignore
 
 
 def derive_seed(*keys: RNGKey, base: Optional[np.random.SeedSequence] = None):
@@ -176,5 +130,6 @@ def int_seed(
         return seed.generate_state(words)
 
 
+from seedbank._config import init_file  # noqa: E402
 from seedbank.cupy import cupy_rng  # noqa: E402
 from seedbank.numpy import numpy_random_state, numpy_rng  # noqa: E402
