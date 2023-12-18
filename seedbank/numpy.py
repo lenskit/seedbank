@@ -1,7 +1,7 @@
 import logging
-from typing import Optional, TypeAlias
 
 import numpy as np
+from typing_extensions import Optional, TypeAlias
 
 from . import derive_seed, int_seed
 from ._keys import SeedLike, make_seed

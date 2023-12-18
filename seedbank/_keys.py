@@ -1,9 +1,9 @@
 # pyright: reportUnnecessaryIsInstance=false
 import hashlib
-from typing import Any, Sequence, TypeAlias
 
 import numpy as np
 import numpy.typing as npt
+from typing_extensions import Any, Sequence, TypeAlias
 
 Entropy: TypeAlias = int | Sequence[int] | npt.NDArray[np.uint32]
 RNGKey: TypeAlias = int | np.integer[Any] | npt.NDArray[Any] | bytes | str

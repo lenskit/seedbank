@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from typing import Optional, Sequence
-
 import numpy as np
+from typing_extensions import Optional, Sequence
 
 from seedbank._keys import RNGKey, SeedLike, make_key, make_seed
 

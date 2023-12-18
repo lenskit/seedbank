@@ -9,9 +9,9 @@ from importlib import import_module
 from importlib.metadata import PackageNotFoundError, version
 from os import PathLike
 from types import ModuleType
-from typing import Optional
 
 import numpy as np
+from typing_extensions import Optional
 
 from seedbank._keys import RNGKey, SeedLike, make_seed
 from seedbank._state import SeedState

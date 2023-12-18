@@ -3,7 +3,8 @@ from __future__ import annotations
 
 import logging
 import warnings
-from typing import Optional
+
+from typing_extensions import Optional
 
 from . import derive_seed
 from ._keys import SeedLike, make_seed
