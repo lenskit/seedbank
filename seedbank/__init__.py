@@ -1,15 +1,21 @@
 """
 Common infrastructure for initializing random number generators.
 """
+# pyright: reportUnknownVariableType=false
+from __future__ import annotations
 
 import logging
 from importlib import import_module
 from importlib.metadata import PackageNotFoundError, version
+from os import PathLike
+from types import ModuleType
+from typing import Optional
 
 import numpy as np
 
 from seedbank._keys import RNGKey, SeedLike, make_seed
 from seedbank._state import SeedState
+from seedbank.numpy import NPRNGSource
 
 try:
     __version__ = version("seedbank")
@@ -29,7 +35,7 @@ __all__ = [
 ]
 
 # This list contains the modules that initialize seeds.
-SEED_INITIALIZERS = [
+SEED_INITIALIZERS: list[str | ModuleType] = [
     "seedbank.stdlib",
     "seedbank.numpy",
     "seedbank.numba",
@@ -39,7 +45,7 @@ SEED_INITIALIZERS = [
 ]
 
 
-def initialize(seed, *keys):
+def initialize(seed: SeedLike, *keys: RNGKey):
     """
     Initialize the random infrastructure with a seed.  This function should generally be
     called very early in the setup.  This initializes all known and available RNGs with
@@ -50,7 +56,7 @@ def initialize(seed, *keys):
     are left to their own default seeding behavior.
 
     Args:
-        seed(int or str or numpy.random.SeedSequence):
+        seed:
             The random seed to initialize with.
         keys:
             Additional keys, to use as a ``spawn_key`` on the seed sequence.
@@ -71,7 +77,9 @@ def initialize(seed, *keys):
     return _root_state.seed
 
 
-def init_file(file, *keys, path="random.seed"):
+def init_file(
+    file: str | bytes | PathLike[str] | PathLike[bytes], *keys: RNGKey, path: str = "random.seed"
+):
     """
     Initialize the random infrastructure with a seed loaded from a file. The loaded seed is
     passed to :func:`initialize`, along with any additional RNG key material.
@@ -104,17 +112,18 @@ def init_file(file, *keys, path="random.seed"):
 
     _log.info("loading seed from %s (key=%s)", file, path)
 
-    config = anyconfig.load(file)
+    config = anyconfig.load(file)  # type: ignore
 
     kps = path.split(".")
-    seed = config
+
+    cvar = config
     for k in kps:
-        seed = seed[k]
+        cvar = cvar[k]  # type: ignore
 
-    initialize(seed, *keys)
+    initialize(cvar, *keys)  # type: ignore
 
 
-def derive_seed(*keys, base=None):
+def derive_seed(*keys: RNGKey, base: Optional[np.random.SeedSequence] = None):
     """
     Derive a seed from the root seed, optionally with additional seed keys.
 
@@ -144,19 +153,20 @@ def root_seed():
     return _root_state.seed
 
 
-def int_seed(words=None, seed=None):
+def int_seed(
+    words: Optional[int] = None, seed: Optional[np.random.SeedSequence] = None
+) -> int | np.ndarray[int, np.dtype[np.uint32 | np.uint64]]:
     """
     Get the current root seed as an integer.
 
     Args:
-        words(int or None):
+        words:
             The number of words of entropy to return, or ``None`` for a single integer.
-        seed(numpy.random.SeedSequence or None):
+        seed:
             An alternate seed to convert to an ingeger; if ``None``, returns the root seed.
 
     Returns:
-        int or numpy.ndarray:
-            The seed entropy.
+        The seed entropy.
     """
 
     if seed is None:
@@ -168,7 +178,9 @@ def int_seed(words=None, seed=None):
         return seed.generate_state(words)
 
 
-def numpy_rng(spec=None):
+def numpy_rng(
+    spec: Optional[NPRNGSource] = None,
+) -> np.random.Generator:
     """
     Get a NumPy random number generator.  This is similar to
     :func:`sklearn.utils.check_random_state`, but it returns a
@@ -176,17 +188,14 @@ def numpy_rng(spec=None):
 
     Args:
         spec:
-            The spec for this RNG.  Can be any of the following types:
+            The spec for this RNG. Can be any of the following types:
 
-            * ``int``
-            * ``None``
-            * :class:`numpy.random.SeedSequence`
-            * :class:`numpy.random.RandomState` (its bit-generator is extracted
-              and wrapped in a generator)
-            * :class:`numpy.random.Generator` (returned as-is)
+            * :data:`SeedLike`
+            * :class:`numpy.random.RandomState`
+            * :class:`numpy.random.Generator`
 
     Returns:
-        numpy.random.Generator: A random number generator.
+        A random number generator.
     """
 
     if isinstance(spec, np.random.Generator):
@@ -200,7 +209,7 @@ def numpy_rng(spec=None):
         return np.random.default_rng(seed)
 
 
-def numpy_random_state(spec=None):
+def numpy_random_state(spec: Optional[NPRNGSource] = None) -> np.random.RandomState:
     """
     Get a legacy NumPy random number generator (:class:`numpy.random.mtrand.RandomState`).
     This is similar to :func:`sklearn.utils.check_random_state`.
@@ -209,20 +218,18 @@ def numpy_random_state(spec=None):
         spec:
             The spec for this RNG.  Can be any of the following types:
 
-            * ``int``
-            * ``None``
-            * :class:`numpy.random.SeedSequence`
+            * :data:`SeedLike`
             * :class:`numpy.random.RandomState`
             * :class:`numpy.random.Generator`
 
     Returns:
-        numpy.random.RandomState: A random number generator.
+        A random number generator.
     """
 
     if isinstance(spec, np.random.RandomState):
         return spec
     elif isinstance(spec, np.random.Generator):
-        return np.random.RandomState(spec._bit_generator)
+        return np.random.RandomState(spec.bit_generator)
     elif spec is None:
         return np.random.RandomState(int_seed(seed=derive_seed()))
     else:
@@ -230,31 +237,4 @@ def numpy_random_state(spec=None):
         return np.random.RandomState(int_seed(seed=seed))
 
 
-def cupy_rng(spec=None):
-    """
-    Get a CuPy random number generator.  This works like :func:`numpy_rng`, but
-    it returns a :class:`cupy.random.Generator` instead.
-
-    Args:
-        spec:
-            The spec for this RNG.  Can be any of the following types:
-
-            * ``int``
-            * ``None``
-            * :class:`numpy.random.SeedSequence`
-            * :class:`numpy.random.RandomState` (its bit-generator is extracted
-              and wrapped in a generator)
-            * :class:`numpy.random.Generator` (returned as-is)
-
-    Returns:
-        cupy.random.Generator: A random number generator.
-    """
-    import cupy
-
-    if isinstance(spec, cupy.random.Generator):
-        return spec
-    elif spec is None:
-        return cupy.random.default_rng(derive_seed())
-    else:
-        seed = make_seed(spec)
-        return cupy.random.default_rng(seed)
+from seedbank.cupy import cupy_rng  # noqa: E402
