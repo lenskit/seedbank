@@ -23,17 +23,22 @@ Seed Material
 SeedBank seeds (either root seeds or keys for derived RNGs) can be specified in a number
 of formats.
 
-.. glossary::
+.. py:attribute:: SeedLike
+    :canonical: _keys.SeedLike
 
-    seed-like
-        Data that can be used as seed material.  This includes:
+    “Seed-like” data is data that can be used as seed material. This includes:
 
-        - :py:class:`numpy.random.SeedSequence` (used as-is)
-        - :py:class:`int` (wrapped in a :py:class:`numpy.random.SeedSequence`)
-        - :py:class:`str` (encoded in UTF-8 and hashed)
-        - :py:class:`bytes` (hashed)
-        - :py:class:`numpy.ndarray` (converted to uint32)
+    - :py:class:`numpy.random.SeedSequence` (used as-is)
+    - :py:class:`int` (wrapped in a :py:class:`numpy.random.SeedSequence`)
+    - :py:class:`str` (encoded in UTF-8 and hashed)
+    - :py:class:`bytes` (hashed)
+    - :py:class:`numpy.ndarray` (converted to uint32)
 
+.. py:attribute:: RNGKey
+    :canonical: _keys.RNGKey
+
+    ``RNGKey`` is the type of seed-like data (:py:attr:`SeedLike`) *except* for
+    :py:class:`~numpy.random.SeedSequence`.
 
 Obtaining Seeds
 ---------------
