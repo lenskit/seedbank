@@ -170,8 +170,9 @@ def int_seed(words=None, seed=None):
 
 def numpy_rng(spec=None):
     """
-    Get a NumPy random number generator.  This is similar to :func:`sklearn.utils.check_random_state`, but
-    it returns a :class:`numpy.random.Generator` instead.
+    Get a NumPy random number generator.  This is similar to
+    :func:`sklearn.utils.check_random_state`, but it returns a
+    :class:`numpy.random.Generator` instead.
 
     Args:
         spec:
@@ -180,7 +181,8 @@ def numpy_rng(spec=None):
             * ``int``
             * ``None``
             * :class:`numpy.random.SeedSequence`
-            * :class:`numpy.random.RandomState` (its bit-generator is extracted and wrapped in a generator)
+            * :class:`numpy.random.RandomState` (its bit-generator is extracted
+              and wrapped in a generator)
             * :class:`numpy.random.Generator` (returned as-is)
 
     Returns:
