@@ -23,6 +23,7 @@ dynamic = ["version"]
 dependencies = [
   "numpy >=1.17",
   "anyconfig ==0.13.*",
+  "typing-extensions ~= 4.8",
 ]
 
 [project.optional-dependencies]

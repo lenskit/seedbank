@@ -74,3 +74,9 @@ jobs:
           LINT_REQUIRED: True
 
       
+      - name: 📐 Check types
+        id: typecheck
+        uses: jakebailey/pyright-action@v1
+        with:
+          extra-args: seedbank
+      

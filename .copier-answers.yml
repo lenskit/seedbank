@@ -7,4 +7,4 @@ project_name: seedbank
 project_title: SeedBank
 require_lint: true
 start_year: 2021
-typecheck: false
+typecheck: true
