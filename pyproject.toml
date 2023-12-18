@@ -32,6 +32,7 @@ dev = [
   "build",
   "twine",
   "ruff",
+  "pyright",
   "copier",
   "ipython",
   "pyproject2conda",
@@ -100,7 +101,7 @@ testing = ["pytest", "hypothesis"]
 exclude = "^docs/"
 
 [tool.pyright]
-typeCheckingMode = "basic"
+typeCheckingMode = "strict"
 exclude = [
   "docs/*",
 ]
