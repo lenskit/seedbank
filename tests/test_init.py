@@ -12,8 +12,8 @@ def test_initialize():
 def test_initialize_key():
     initialize(42, "wombat")
     assert _root_state.seed.entropy == 42
-    k = make_key("wombat")
-    assert all(_root_state.seed.spawn_key[0] == k)
+    k = make_key("wombat", True)
+    assert _root_state.seed.spawn_key[0] == k
     assert root_seed().entropy == 42
 
 
