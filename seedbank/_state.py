@@ -62,15 +62,15 @@ class SeedState:
         Derive a new seed state.
 
         Args:
-            base(SeedLike):
+            base:
                 The base seed.  If ``None``, use this seed state.
-            keys(list of RNGKey):
+            keys:
                 Additional keys for deriving the seed.  If no keys are
                 provided, calls :meth:`numpy.random.SeedSequence.spawn` to
                 obtain a new RNG.
 
         Returns:
-            SeedState: the derived seed state.
+            The derived seed state.
         """
         if base is None:
             base = self.seed
