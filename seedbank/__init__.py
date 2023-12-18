@@ -4,12 +4,12 @@ Common infrastructure for initializing random number generators.
 
 import logging
 from importlib import import_module
+from importlib.metadata import PackageNotFoundError, version
+
 import numpy as np
 
-from seedbank._state import SeedState
 from seedbank._keys import make_seed
-
-from importlib.metadata import version, PackageNotFoundError
+from seedbank._state import SeedState
 
 try:
     __version__ = version("seedbank")
