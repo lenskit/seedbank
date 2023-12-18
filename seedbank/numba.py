@@ -1,17 +1,16 @@
 import logging
+import warnings
 
 import numpy as np
 
 try:
     from numba import njit
-
-    _available = True
 except ImportError:
-    _available = False
+    njit = None
 
 _log = logging.getLogger(__name__)
 
-if _available:
+if njit is not None:
 
     @njit
     def _seed_numba(seed):
@@ -19,9 +18,13 @@ if _available:
 
 
 def is_available():
-    return _available
+    return njit is not None
 
 
 def seed(state):
+    if njit is None:
+        warnings.warn("numba not available, skipping seed")
+        return
+
     _log.debug("initializing Numba seed")
     _seed_numba(state.int_seed)
