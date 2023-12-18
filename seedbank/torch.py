@@ -1,4 +1,6 @@
+# type: ignore
 import logging
+import warnings
 
 try:
     import torch
@@ -13,5 +15,9 @@ def is_available():
 
 
 def seed(state):
+    if torch is None:
+        warnings.warn("torch not available, skipping seed")
+        return
+
     seed = state.int_seed
     torch.manual_seed(seed)
