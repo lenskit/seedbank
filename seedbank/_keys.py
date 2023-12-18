@@ -1,10 +1,11 @@
+# pyright: reportUnnecessaryIsInstance=false
 import hashlib
 from typing import Any, Sequence, TypeAlias
 
 import numpy as np
 import numpy.typing as npt
 
-Entropy: TypeAlias = int | Sequence[int] | npt.NDArray[Any]
+Entropy: TypeAlias = int | Sequence[int] | npt.NDArray[np.uint32]
 RNGKey: TypeAlias = int | np.integer[Any] | npt.NDArray[Any] | bytes | str
 SeedLike: TypeAlias = np.random.SeedSequence | RNGKey
 
@@ -23,6 +24,7 @@ def make_key(data: RNGKey) -> Entropy:
     if isinstance(data, str):
         return make_key(data.encode("utf8"))
 
+    # never reached for type-checked code but we want to be robust
     dt = type(data)
     raise TypeError(f"invalid seed type {dt}")
 
