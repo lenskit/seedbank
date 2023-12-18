@@ -23,7 +23,7 @@ jobs:
       - name: 🐍 Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.12"
           cache: "pip"
 
       - name: 🛠️ Install development tools and dependencies
@@ -73,10 +73,10 @@ jobs:
           LINT_PASSED: ${{ steps.lint.outputs.passed }}
           LINT_REQUIRED: True
 
-      
+
       - name: 📐 Check types
         id: typecheck
         uses: jakebailey/pyright-action@v1
         with:
           extra-args: seedbank
-      
+
