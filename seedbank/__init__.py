@@ -62,8 +62,7 @@ def initialize(seed: SeedLike, *keys: RNGKey):
             Additional keys, to use as a ``spawn_key`` on the seed sequence.
             Passed to :func:`derive_seed`.
     Returns:
-        numpy.random.SeedSequence:
-            The random seed.
+        The random seed.
     """
     _root_state.initialize(seed, keys)
     _log.info("initialized root seed %s", _root_state.seed)
@@ -100,11 +99,11 @@ def init_file(
     .. _anyconfig: https://github.com/ssato/python-anyconfig
 
     Args:
-        file(str or pathlib.Path):
+        file:
             The filename for the configuration file to load.
-        keys(list of int or str):
+        keys:
             Aditional key material.
-        path(str):
+        path:
             The path within the configuration file or object in which the seed is stored.
             Can be multiple keys separated with '.'.
     """
@@ -128,16 +127,15 @@ def derive_seed(*keys: RNGKey, base: Optional[np.random.SeedSequence] = None):
     Derive a seed from the root seed, optionally with additional seed keys.
 
     Args:
-        keys(list of int or str):
+        keys:
             Additional components to add to the spawn key for reproducible derivation.
             If unspecified, the seed's internal counter is incremented (by calling
             :meth:`numpy.random.SeedSequence.spawn`).
-        base(numpy.random.SeedSequence):
+        base:
             The base seed to use.  If ``None``, uses the root seed.
 
     Returns:
-        numpy.random.SeedSequence:
-            The random seed.
+        The random seed.
     """
     return _root_state.derive(base, keys).seed
 
