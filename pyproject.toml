@@ -108,3 +108,4 @@ exclude = [
 ]
 reportMissingImports = true
 reportMissingTypeStubs = false
+reportUnnecessaryIsInstance = "warning"
