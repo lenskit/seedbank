@@ -29,9 +29,15 @@ def make_key(data: RNGKey) -> Entropy:
     raise TypeError(f"invalid seed type {dt}")
 
 
-def make_seed(data: SeedLike):
+def make_seed(data: SeedLike) -> np.random.SeedSequence:
     """
     Get a seed sequence from a piece of data.
+
+    Args:
+        data: The seed material.
+
+    Returns:
+        A seed sequence suitable for initializing RNGs.
     """
     if isinstance(data, np.random.SeedSequence):
         return data
