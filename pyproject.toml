@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "seedbank"
 description = "Common infrastructure for seeding random number generators."
 authors = [
-  {name="Michael Ekstrand", email="mdekstrand@drexel.edu"}
+  { name = "Michael Ekstrand", email = "mdekstrand@drexel.edu" },
 ]
 classifiers = [
   "License :: OSI Approved :: MIT License",
@@ -36,6 +36,7 @@ dev = [
   "ruff",
   "copier",
   "ipython",
+  "pyproject2conda",
   "sphinx-autobuild",
 ]
 test = [
@@ -74,7 +75,8 @@ channels = ["conda-forge"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py37"
+target-version = "py310"
+select = ["E", "F", "I"]
 exclude = [
   ".git",
   "__pycache__",
@@ -82,3 +84,26 @@ exclude = [
   "build",
   "dist",
 ]
+
+[tool.ruff.lint.isort]
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "first-party",
+  "local-folder",
+]
+
+[tool.ruff.lint.isort.sections]
+test = ["pytest", "hypothesis"]
+
+[tool.mypy]
+exclude = "^docs/"
+
+[tool.pyright]
+typeCheckingMode = "basic"
+exclude = [
+  "docs/*",
+]
+reportMissingImports = true
+reportMissingTypeStubs = false

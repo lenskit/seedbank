@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier
-_commit: ccc299c
+_commit: 7fd8cf0
 _src_path: https://github.com/lenskit/lk-project-template.git
 package_name: seedbank
 project_descr: Common infrastructure for seeding random number generators.
@@ -7,3 +7,4 @@ project_name: seedbank
 project_title: SeedBank
 require_lint: true
 start_year: 2021
+typecheck: false
