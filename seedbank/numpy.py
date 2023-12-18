@@ -27,15 +27,16 @@ def numpy_rng(
     """
     Get a NumPy random number generator.  This is similar to
     :func:`sklearn.utils.check_random_state`, but it returns a
-    :class:`numpy.random.Generator` instead.
+    :class:`~numpy.random.Generator` instead.
 
     Args:
         spec:
             The spec for this RNG. Can be any of the following types:
 
             * :data:`SeedLike`
-            * :class:`numpy.random.RandomState`
-            * :class:`numpy.random.Generator`
+            * :class:`numpy.random.Generator` — returned as-is
+            * :class:`numpy.random.RandomState` — its ``_bit_generator`` is
+              extracted and wrapped in a :class:`~numpy.random.Generator`.
 
     Returns:
         A random number generator.
@@ -54,16 +55,19 @@ def numpy_rng(
 
 def numpy_random_state(spec: Optional[NPRNGSource] = None) -> np.random.RandomState:
     """
-    Get a legacy NumPy random number generator (:class:`numpy.random.mtrand.RandomState`).
-    This is similar to :func:`sklearn.utils.check_random_state`.
+    Get a legacy NumPy random number generator
+    (:class:`~numpy.random.mtrand.RandomState`). This is similar to
+    :func:`sklearn.utils.check_random_state`.
 
     Args:
         spec:
             The spec for this RNG.  Can be any of the following types:
 
             * :data:`SeedLike`
-            * :class:`numpy.random.RandomState`
-            * :class:`numpy.random.Generator`
+            * :class:`numpy.random.RandomState` — returned as-is
+            * :class:`numpy.random.Generator` — its
+              :attr:`~numpy.random.Generator.bit_generator` is extracted and
+              wrapped in a :class:`~numpy.random.RandomState`.
 
     Returns:
         A random number generator.
