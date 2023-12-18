@@ -1,16 +1,25 @@
+from __future__ import annotations
+
+from typing import Optional, Sequence
+
 import numpy as np
 
-from seedbank._keys import make_key, make_seed
+from seedbank._keys import RNGKey, SeedLike, make_key, make_seed
 
 
 class SeedState:
     """
     Manage a root seed and facilities to derive seeds.
+
+    Args:
+        seed:
+            The initial seed for this seed state.  If ``None``, a default
+            :class:`~np.random.SeedSequence` is initialized.
     """
 
     _seed: np.random.SeedSequence
 
-    def __init__(self, seed=None):
+    def __init__(self, seed: Optional[np.random.SeedSequence] = None):
         if seed is None:
             seed = np.random.SeedSequence()
         self._seed = seed
@@ -25,19 +34,19 @@ class SeedState:
         "Get this seed as an integer."
         return int(self.entropy(1)[0])
 
-    def entropy(self, words):
+    def entropy(self, words: int) -> np.ndarray[int, np.dtype[np.uint32 | np.uint64]]:
         """
         Get *n* words of entropy as a NumPy array.
 
         Args:
-            words(int): the number of words to return.
+            words: the number of words to return.
 
         Returns:
-            numpy.ndarray: the entropy.
+            the entropy.
         """
         return self._seed.generate_state(words)
 
-    def initialize(self, seed, keys):
+    def initialize(self, seed: np.random.SeedSequence | RNGKey, keys: Sequence[RNGKey]):
         seed = make_seed(seed)
 
         if keys:
@@ -46,14 +55,16 @@ class SeedState:
         self._seed = seed
         return seed
 
-    def derive(self, base, keys=None):
+    def derive(
+        self, base: Optional[SeedLike], keys: Optional[Sequence[RNGKey]] = None
+    ) -> SeedState:
         """
         Derive a new seed state.
 
         Args:
-            base(seed-like):
+            base(SeedLike):
                 The base seed.  If ``None``, use this seed state.
-            keys(list of seed-like):
+            keys(list of RNGKey):
                 Additional keys for deriving the seed.  If no keys are
                 provided, calls :meth:`numpy.random.SeedSequence.spawn` to
                 obtain a new RNG.
@@ -74,9 +85,9 @@ class SeedState:
 
         return SeedState(seed)
 
-    def rng(self, seed=None):
+    def rng(self, seed: Optional[SeedLike] = None) -> np.random.Generator:
         if seed is None:
             (seed,) = self.seed.spawn(1)
         elif not isinstance(seed, np.random.SeedSequence):
-            seed = np.random.SeedSequence(make_key)
+            seed = np.random.SeedSequence(make_key(seed))
         return np.random.default_rng(seed)

@@ -8,7 +8,7 @@ from importlib.metadata import PackageNotFoundError, version
 
 import numpy as np
 
-from seedbank._keys import make_seed
+from seedbank._keys import RNGKey, SeedLike, make_seed
 from seedbank._state import SeedState
 
 try:
