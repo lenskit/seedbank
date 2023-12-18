@@ -1,4 +1,4 @@
-from seedbank import derive_seed, initialize, _root_state, root_seed, int_seed
+from seedbank import _root_state, derive_seed, initialize, int_seed, root_seed
 from seedbank._keys import make_key
 
 
