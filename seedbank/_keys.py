@@ -1,14 +1,20 @@
 import hashlib
+from typing import Any, Sequence, TypeAlias
 
 import numpy as np
+import numpy.typing as npt
+
+Entropy: TypeAlias = int | Sequence[int] | npt.NDArray[Any]
+RNGKey: TypeAlias = int | np.integer[Any] | npt.NDArray[Any] | bytes | str
+SeedLike: TypeAlias = np.random.SeedSequence | RNGKey
 
 
-def make_key(data):
+def make_key(data: RNGKey) -> Entropy:
     """
     Get a key, usable as entropy in a seed sequence, from a piece of data.
     """
     if isinstance(data, int) or isinstance(data, np.integer):
-        return data
+        return int(data)
     if isinstance(data, np.ndarray):
         return data.astype(np.uint32)
     if isinstance(data, bytes):
@@ -21,7 +27,7 @@ def make_key(data):
     raise TypeError(f"invalid seed type {dt}")
 
 
-def make_seed(data):
+def make_seed(data: SeedLike):
     """
     Get a seed sequence from a piece of data.
     """
