@@ -77,8 +77,8 @@ class SeedState:
             base = make_seed(base)
 
         if keys:
-            k2 = tuple(make_key(k) for k in keys)
-            seed = np.random.SeedSequence(base.entropy, spawn_key=base.spawn_key + k2)  # type: ignore
+            k2 = tuple(make_key(k, True) for k in keys)
+            seed = np.random.SeedSequence(base.entropy, spawn_key=base.spawn_key + k2)
         else:
             seed = base.spawn(1)[0]
 
