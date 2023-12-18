@@ -6,23 +6,35 @@ import numpy.typing as npt
 from typing_extensions import Any, Sequence, TypeAlias
 
 Entropy: TypeAlias = int | Sequence[int] | npt.NDArray[np.uint32]
-RNGKey: TypeAlias = int | np.integer[Any] | npt.NDArray[Any] | bytes | str
+RNGKey: TypeAlias = int | np.integer[Any] | npt.NDArray[Any] | bytes | memoryview | str
 SeedLike: TypeAlias = np.random.SeedSequence | RNGKey
 
 
-def make_key(data: RNGKey) -> Entropy:
+def make_key(data: RNGKey, single: bool = False) -> Entropy:
     """
     Get a key, usable as entropy in a seed sequence, from a piece of data.
+
+    Args:
+        data: The key data.
+        single: If ``True``, always return a single integer.
     """
     if isinstance(data, int) or isinstance(data, np.integer):
         return int(data)
     if isinstance(data, np.ndarray):
-        return data.astype(np.uint32)
-    if isinstance(data, bytes):
-        h = hashlib.md5(data)
-        return np.frombuffer(h.digest(), np.uint32)
+        if single:
+            return make_key(memoryview(data), single)
+        else:
+            return data.astype(np.uint32)
+    if isinstance(data, (bytes, memoryview)):
+        size = 8 if single else 32
+        h = hashlib.blake2b(data, digest_size=size)
+        seed = np.frombuffer(h.digest(), np.uint64)
+        if single:
+            return int(seed[0])
+        else:
+            return seed.astype(np.uint32)
     if isinstance(data, str):
-        return make_key(data.encode("utf8"))
+        return make_key(data.encode("utf8"), single)
 
     # never reached for type-checked code but we want to be robust
     dt = type(data)

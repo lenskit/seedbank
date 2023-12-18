@@ -34,3 +34,8 @@ def test_make_key_ndarray():
     key = make_key(src)
     assert isinstance(key, np.ndarray)
     assert all(key == src)
+
+
+def test_make_key_str_int():
+    key = make_key("hello, world", True)
+    assert isinstance(key, int)
