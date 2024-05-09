@@ -1,6 +1,7 @@
 """
 Common infrastructure for initializing random number generators.
 """
+
 # pyright: reportUnknownVariableType=false
 from __future__ import annotations
 

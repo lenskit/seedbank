@@ -1,6 +1,7 @@
 """
 Configuration file parsing support.
 """
+
 from __future__ import annotations
 
 import logging

@@ -11,13 +11,11 @@ SeedLike: TypeAlias = np.random.SeedSequence | RNGKey
 
 
 @overload
-def make_key(data: RNGKey, single: Literal[True]) -> int:
-    ...
+def make_key(data: RNGKey, single: Literal[True]) -> int: ...
 
 
 @overload
-def make_key(data: RNGKey, single: bool = False) -> Entropy:
-    ...
+def make_key(data: RNGKey, single: bool = False) -> Entropy: ...
 
 
 def make_key(data: RNGKey, single: bool = False) -> Entropy:
