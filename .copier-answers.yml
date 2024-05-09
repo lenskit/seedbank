@@ -1,6 +1,7 @@
 # Changes here will be overwritten by Copier
-_commit: fb7354f
+_commit: e75f250
 _src_path: https://github.com/lenskit/lk-project-template.git
+owner: Drexel University and contributors
 package_name: seedbank
 project_descr: Common infrastructure for seeding random number generators.
 project_name: seedbank
