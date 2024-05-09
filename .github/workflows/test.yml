@@ -56,7 +56,6 @@ jobs:
       fail-fast: false
       matrix:
         extra:
-        - cuda11x
         - numba
         - torch
         - tf
