@@ -33,6 +33,7 @@ __all__ = [
     "numpy_rng",
     "numpy_random_state",
     "cupy_rng",
+    "SeedLike",
 ]
 
 # This list contains the modules that initialize seeds.
