@@ -1,4 +1,6 @@
 # pyright: reportUnnecessaryIsInstance=false
+from __future__ import annotations
+
 import hashlib
 from typing import Any, Literal, Sequence, TypeAlias, overload
 
