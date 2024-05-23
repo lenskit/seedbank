@@ -1,5 +1,6 @@
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath(".."))
 
 import seedbank
@@ -24,8 +25,7 @@ pygments_style = "sphinx"
 highlight_language = "python3"
 
 html_theme = "furo"
-html_theme_options = {
-}
+html_theme_options = {}
 templates_path = ["_templates"]
 
 intersphinx_mapping = {
@@ -34,8 +34,6 @@ intersphinx_mapping = {
     "sklearn": ("https://scikit-learn.org/stable/", None),
 }
 
-autodoc_default_options = {
-    "members": True,
-    "member-order": "bysource"
-}
+autodoc_default_options = {"members": True, "member-order": "bysource"}
 autodoc_typehints = "description"
+autodoc_type_aliases = {"SeedLike": "seedbank.SeedLike"}
