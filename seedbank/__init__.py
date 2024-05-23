@@ -11,6 +11,7 @@ from importlib.metadata import PackageNotFoundError, version
 from types import ModuleType
 
 import numpy as np
+from numpy.random import SeedSequence
 from typing_extensions import Optional
 
 from seedbank._keys import RNGKey, SeedLike, make_seed
@@ -47,7 +48,7 @@ SEED_INITIALIZERS: list[str | ModuleType] = [
 ]
 
 
-def initialize(seed: SeedLike, *keys: RNGKey):
+def initialize(seed: SeedLike, *keys: RNGKey) -> SeedSequence:
     """
     Initialize the random infrastructure with a seed.  This function should generally be
     called very early in the setup.  This initializes all known and available RNGs with
@@ -78,7 +79,7 @@ def initialize(seed: SeedLike, *keys: RNGKey):
     return _root_state.seed
 
 
-def derive_seed(*keys: RNGKey, base: Optional[np.random.SeedSequence] = None):
+def derive_seed(*keys: RNGKey, base: Optional[np.random.SeedSequence] = None) -> SeedSequence:
     """
     Derive a seed from the root seed, optionally with additional seed keys.
 
@@ -96,7 +97,7 @@ def derive_seed(*keys: RNGKey, base: Optional[np.random.SeedSequence] = None):
     return _root_state.derive(base, keys).seed
 
 
-def root_seed():
+def root_seed() -> SeedSequence:
     """
     Get the current root seed.
 

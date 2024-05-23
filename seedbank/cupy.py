@@ -29,7 +29,7 @@ def seed(state):
     cupy.random.seed(state.int_seed)
 
 
-def cupy_rng(spec: Optional[SeedLike | cupy.random.Generator] = None):
+def cupy_rng(spec: Optional[SeedLike | cupy.random.Generator] = None) -> cupy.random.Generator:
     """
     Get a CuPy random number generator.  This works like :func:`numpy_rng`, but
     it returns a :class:`cupy.random.Generator` instead.
