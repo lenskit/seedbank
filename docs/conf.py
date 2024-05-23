@@ -36,4 +36,4 @@ intersphinx_mapping = {
 
 autodoc_default_options = {"members": True, "member-order": "bysource"}
 autodoc_typehints = "description"
-autodoc_type_aliases = {"SeedLike": "seedbank.SeedLike"}
+# autodoc_type_aliases = {"SeedLike": "seedbank.SeedLike"}

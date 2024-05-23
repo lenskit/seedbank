@@ -23,8 +23,7 @@ Seed Material
 SeedBank seeds (either root seeds or keys for derived RNGs) can be specified in a number
 of formats.
 
-.. py:attribute:: SeedLike
-    :canonical: _keys.SeedLike
+.. py:data:: SeedLike
 
     “Seed-like” data is data that can be used as seed material. This includes:
 
@@ -34,7 +33,7 @@ of formats.
     - :py:class:`bytes` (hashed)
     - :py:class:`numpy.ndarray` (converted to uint32)
 
-.. py:attribute:: RNGKey
+.. py:data:: RNGKey
     :canonical: _keys.RNGKey
 
     ``RNGKey`` is the type of seed-like data (:py:attr:`SeedLike`) *except* for
