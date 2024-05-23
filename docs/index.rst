@@ -31,7 +31,7 @@ SeedBank will seed all of the following generators that are available:
 - cupy (with :py:func:`cupy.random.seed`, also exposing :py:func:`seedbank.cupy_rng`)
 
 In addition, it will initialize a root seed for constructing new-style NumPy
-:py:func:`numpy.random.Generator` instances.
+:py:class:`numpy.random.Generator` instances (:py:func:`numpy_rng`).
 
 If SeedBank doesn't support your RNG yet, please submit a `pull request`_.
 
