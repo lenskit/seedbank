@@ -31,21 +31,15 @@ If SeedBank doesn’t support your RNG yet, please submit a pull request!
 
 ## Developing SeedBank
 
-SeedBank uses Flit for managing dependencies.  To set up in a fresh
-virtual environment:
+The easiest way to set up your environment to develop seedbank is to install
+`uv` and `just`, and run:
 
-    python -m pip install flit
-    flit install --pth-file
+    uv venv create
+    just install-dev
 
-[conda-lock][] can help you set up a Conda environment (replace `linux-64` with your platform):
+You can also set up dev dependencies with `pip`:
 
-    # install conda-lock in base environment
-    # alternatively: pip install conda-lock
-    conda install -c conda-forge conda-lock
-    # create the lock file
-    conda-lock -p linux-64 -f pyproject.toml
-    # create the environment
-    conda env create -n seedbank -f conda-linux-64.lock
+    pip install -e '.[dev,test,doc]
 
 ## Acknowledgements
 
