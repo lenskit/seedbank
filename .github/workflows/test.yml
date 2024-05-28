@@ -59,6 +59,7 @@ jobs:
         - numba
         - torch
         - tf
+        - jax
 
     steps:
     - uses: actions/checkout@v3
