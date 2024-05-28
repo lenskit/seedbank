@@ -24,12 +24,15 @@ def jax_key(
     spec: Optional[SeedLike] = None,
 ) -> jax.Array:
     """
-    Get a standard library random number generator (:class:`random.Random`) with
-    either the specified seed or a fresh seed.
+    Get a Jax random key (see :func:`jax.random.key`).  Jax does not use global
+    state, instead relying on explicit random state management.  This function
+    allows you to obtain an initial key for a set of random operations from the
+    Seedbank key.
 
     Args:
         spec:
-            The spec for this RNG.
+            The spec from which to generate the key.  The same spec will produce
+            the same key.
 
     Returns:
         A random number generator.

@@ -10,6 +10,7 @@ from seedbank import jax_key
 
 try:
     import jax
+    import jax.numpy as jnp
 except ImportError:
     pytestmark = mark.skip("JAX not available")
 
@@ -28,4 +29,13 @@ def test_jax_newkey():
     """
     k1 = jax_key()
     k2 = jax_key()
-    assert k1 != k2
+    assert not jnp.equal(k1, k2)
+
+
+def test_jax_samekey():
+    """
+    Test that two stdlib RNGs with fresh seeds return different numbers.
+    """
+    k1 = jax_key("foo")
+    k2 = jax_key("foo")
+    assert jnp.equal(k1, k2)
