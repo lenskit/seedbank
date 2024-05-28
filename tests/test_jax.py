@@ -4,16 +4,15 @@ stdlib python tests
 
 import random
 
-# try:
-import jax
-import jax.numpy as jnp
-
 from pytest import mark
 
 from seedbank import jax_key
 
-# except ImportError:
-# pytestmark = mark.skip("JAX not available")
+try:
+    import jax
+    import jax.numpy as jnp
+except ImportError:
+    pytestmark = mark.skip("JAX not available")
 
 
 def test_jax_key():
