@@ -57,7 +57,7 @@ torch = ["torch"]
 cupy = ["cupy"]
 cuda11x = ["cupy-cuda11x"]
 tf = ["tensorflow >=2,<3"]
-jax = ["jax>=0.4.16"]
+jax = ["jax[cpu]>=0.4.16"]
 
 [project.urls]
 Homepage = "https://seedbank.lenksit.org"
