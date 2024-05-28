@@ -136,3 +136,4 @@ def int_seed(
 from seedbank._config import init_file  # noqa: E402
 from seedbank.cupy import cupy_rng  # noqa: E402
 from seedbank.numpy import numpy_random_state, numpy_rng  # noqa: E402
+from seedbank.stdlib import std_rng  # noqa: E402
