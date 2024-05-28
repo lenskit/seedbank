@@ -31,6 +31,7 @@ __all__ = [
     "initialize",
     "init_file",
     "derive_seed",
+    "std_rng",
     "numpy_rng",
     "numpy_random_state",
     "cupy_rng",
