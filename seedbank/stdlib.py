@@ -22,8 +22,8 @@ def std_rng(
     spec: Optional[SeedLike] = None,
 ) -> random.Random:
     """
-    Get a standard library random number generator with either the specified
-    seed or a fresh seed.
+    Get a standard library random number generator (:class:`random.Random`) with
+    either the specified seed or a fresh seed.
 
     Args:
         spec:
