@@ -4,7 +4,7 @@ JAX support.
 Jax has no global random seeds, but we support making Jax keys.
 """
 
-# pyright: basic
+# pyright: basic, reportAttributeAccessIssue=false
 from __future__ import annotations
 
 from typing import Optional
