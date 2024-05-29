@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: 🐍 Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: "pip"
@@ -76,7 +76,8 @@ jobs:
 
       - name: 📐 Check types
         id: typecheck
-        uses: jakebailey/pyright-action@v1
+        uses: jakebailey/pyright-action@v2
         with:
+          version: PATH
           extra-args: seedbank
 
