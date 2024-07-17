@@ -27,14 +27,14 @@ def _parse_toml(file: Path) -> dict[str, Any]:
     except ImportError:
         from toml import loads
 
-    _log.debug("parsing TOML from {}", file)
+    _log.debug("parsing TOML from %s", file)
     return loads(file.read_text())
 
 
 def _parse_yaml(file: Path) -> dict[str, Any]:
     from yaml import SafeLoader, load
 
-    _log.debug("parsing YAML from {}", file)
+    _log.debug("parsing YAML from %s", file)
     with file.open("r") as f:
         return load(f, SafeLoader)
 
@@ -42,7 +42,7 @@ def _parse_yaml(file: Path) -> dict[str, Any]:
 def _parse_json(file: Path) -> dict[str, Any]:
     from json import loads
 
-    _log.debug("parsing JSON from {}", file)
+    _log.debug("parsing JSON from %s", file)
     return loads(file.read_text())
 
 
