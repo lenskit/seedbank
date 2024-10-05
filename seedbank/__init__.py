@@ -42,6 +42,7 @@ __all__ = [
     "numpy_random_state",
     "cupy_rng",
     "jax_key",
+    "RNGKey",
     "SeedLike",
 ]
 
