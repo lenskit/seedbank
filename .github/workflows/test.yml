@@ -26,6 +26,7 @@ jobs:
         - "3.10"
         - "3.11"
         - "3.12"
+        - "3.13"
 
     steps:
     - uses: actions/checkout@v3
@@ -37,17 +38,25 @@ jobs:
       with:
         python-version: ${{matrix.python}}
 
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+
     - name: Set up dev environment
       run: |
-        pip install -e '.[test]'
+        uv sync --only-group test
+        uv pip install .
 
     - name: Run tests
-      run: python -m pytest --cov=seedbank --cov-report=xml tests
+      run: |
+        uv run --no-sync pytest --cov=seedbank --cov-report=xml tests
 
-    - name: Save test results
-      uses: lenskit/lkbuild/actions/save-test-results@main
+    - name: Upload logs
+      uses: actions/upload-artifact@v3
       with:
-        artifact-name: test-${{matrix.platform}}-py${{matrix.python}}
+        name: test-${{matrix.platform}}-py${{matrix.python}}
+        path: |
+          test*.log
+          coverage.xml
 
   test-extra:
     name: Test single extra ${{matrix.extra}}
@@ -71,17 +80,25 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+
     - name: Set up dev environment
       run: |
-        pip install -e '.[test,${{matrix.extra}}]'
+        uv sync --only-group test
+        uv pip install ".[${{matrix.extra}}]"
 
     - name: Run tests
-      run: python -m pytest --cov=seedbank --cov-report=xml tests
+      run: |
+        uv run --no-sync pytest --cov=seedbank --cov-report=xml tests
 
-    - name: Save test results
-      uses: lenskit/lkbuild/actions/save-test-results@main
+    - name: Upload logs
+      uses: actions/upload-artifact@v3
       with:
-        artifact-name: test-extra-${{matrix.extra}}
+        name: test-extra-${{matrix.extra}}
+        path: |
+          test*.log
+          coverage.xml
 
   report:
     name: Process test results
@@ -95,7 +112,6 @@ jobs:
 
     - name: Report test results
       uses: lenskit/lkbuild/actions/report-test-results@main
-
 
   sdist:
     name: Build and Publish Packages
@@ -113,7 +129,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: "3.10"
+        python-version: "3.13"
 
     - name: Install Python deps
       run: pip install -U build twine

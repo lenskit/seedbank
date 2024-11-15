@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import logging
 from importlib import import_module
-from importlib.metadata import PackageNotFoundError, version
 from types import ModuleType
 
 import numpy as np
@@ -24,8 +23,8 @@ from seedbank._keys import RNGKey, SeedLike, make_seed
 from seedbank._state import SeedState
 
 try:
-    __version__ = version("seedbank")
-except PackageNotFoundError:
+    from ._version import version as __version__  # noqa: F401
+except ImportError:
     # package is not installed
     pass
 

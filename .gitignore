@@ -48,3 +48,5 @@ conda-lock.yml
 *~
 *.tmp
 .vs/
+
+_version.py
